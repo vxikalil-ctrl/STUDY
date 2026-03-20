@@ -66,10 +66,6 @@ input:focus,select:focus{border-color:var(--green)}
 .item-sub{font-size:11px;color:var(--text2);margin-top:2px}
 .progress-bar{height:7px;background:var(--bg);border-radius:4px;overflow:hidden;margin-top:5px}
 .progress-fill{height:100%;background:var(--green);border-radius:4px;transition:.3s}
-.pomo-display{text-align:center;padding:2rem 0}
-.pomo-time{font-size:72px;font-weight:700;letter-spacing:-4px;margin-bottom:6px;font-variant-numeric:tabular-nums}
-.pomo-label{font-size:13px;color:var(--text2);margin-bottom:20px}
-.pomo-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
 .empty{text-align:center;padding:2rem;color:var(--text3);font-size:13px}
 .tag{font-size:11px;background:var(--bg);color:var(--text2);padding:2px 7px;border-radius:20px;white-space:nowrap}
 .acerto-bar{height:5px;background:var(--bg);border-radius:3px;overflow:hidden;margin-top:4px}
@@ -106,10 +102,6 @@ input:focus,select:focus{border-color:var(--green)}
 .metodo-tag{display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:2px 7px;border-radius:20px;font-weight:600}
 .metodo-nova{background:var(--blue-bg);color:var(--blue-txt)}
 .metodo-rev{background:var(--amber-bg);color:var(--amber-txt)}
-.pomo-settings{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-.pomo-set-group{display:flex;flex-direction:column;align-items:center;gap:4px}
-.pomo-set-group label{font-size:11px;color:var(--text2)}
-.pomo-set-group input{width:72px;text-align:center;margin:0;padding:6px;font-size:16px;font-weight:700}
 /* SUB-ASSUNTOS */
 .sub-assuntos{margin-top:8px;margin-left:44px;border-left:2px solid var(--border);padding-left:10px}
 .sub-assunto-item{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border)}
@@ -117,16 +109,37 @@ input:focus,select:focus{border-color:var(--green)}
 .sub-assunto-text{font-size:12px;flex:1;color:var(--text2)}
 .sub-assunto-add{display:flex;gap:6px;margin-top:6px}
 .sub-assunto-add input{margin:0;font-size:12px;padding:5px 8px}
+/* REVISÃO SUB-ASSUNTO */
+.sub-rev-badge{display:inline-flex;align-items:center;font-size:10px;padding:1px 6px;border-radius:20px;font-weight:600;white-space:nowrap}
 /* EDIÇÃO INLINE */
 .editavel{cursor:pointer;border-radius:4px;transition:.15s;padding:1px 3px;margin:-1px -3px}
 .editavel:hover{background:var(--amber-bg);color:var(--amber-txt)}
-.editavel:hover::after{content:' ✏️';font-size:10px;opacity:.6}
+.editavel:hover::after{content:' ✏️';font-size:10px;opacity:.7}
 .inline-edit-input{font-size:13px;font-weight:600;padding:3px 7px;border:1.5px solid var(--green);border-radius:5px;background:var(--surface);color:var(--text);outline:none;width:100%;font-family:inherit}
-.inline-edit-sub{font-size:12px;font-weight:400;padding:2px 6px;border:1.5px solid var(--green);border-radius:5px;background:var(--surface);color:var(--text);outline:none;flex:1;font-family:inherit}
-.edit-hint{font-size:10px;color:var(--text3);margin-top:4px}
+/* POMODORO */
+.pomo-tabs{display:flex;gap:6px;margin-bottom:16px;justify-content:center}
+.pomo-tab{padding:6px 18px;border:1px solid var(--border);border-radius:20px;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-weight:500}
+.pomo-tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.pomo-panel{display:none}.pomo-panel.active{display:block}
+.pomo-display{text-align:center;padding:1.5rem 0}
+.pomo-time{font-size:72px;font-weight:700;letter-spacing:-4px;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.pomo-label{font-size:13px;color:var(--text2);margin-bottom:20px}
+.pomo-btns{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
+.pomo-settings{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.pomo-set-group{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pomo-set-group label{font-size:11px;color:var(--text2)}
+.pomo-set-group input{width:72px;text-align:center;margin:0;padding:6px;font-size:16px;font-weight:700}
+/* CRONÔMETRO LIVRE */
+.crono-time{font-size:72px;font-weight:700;letter-spacing:-4px;font-variant-numeric:tabular-nums;margin-bottom:8px}
+.crono-laps{max-height:180px;overflow-y:auto;margin-top:10px}
+.crono-lap{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2)}
+.crono-total{font-size:13px;font-weight:600;color:var(--green);text-align:center;margin-top:6px}
+/* INTERVALO BADGE */
+.int-badge{display:inline-flex;align-items:center;font-size:10px;padding:1px 6px;border-radius:20px;font-weight:600;background:var(--blue-bg);color:var(--blue-txt);white-space:nowrap}
+.edit-hint{font-size:10px;color:var(--text3);margin-bottom:8px;padding:0 4px}
 @media(max-width:600px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}
-  .pomo-time{font-size:52px}
+  .pomo-time,.crono-time{font-size:52px}
   .nav button{font-size:11px;padding:6px 4px}
   .sub-assuntos{margin-left:10px}
 }
@@ -156,7 +169,7 @@ input:focus,select:focus{border-color:var(--green)}
 
   <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
-    <div id="fraseCard" class="frase-card">
+    <div class="frase-card">
       <button class="frase-btn" onclick="novaFrase()">🔄</button>
       <div class="frase-text" id="fraseText"></div>
       <div class="frase-autor" id="fraseAutor"></div>
@@ -181,7 +194,7 @@ input:focus,select:focus{border-color:var(--green)}
         <button class="btn primary" onclick="addMateria()">Adicionar</button>
       </div>
     </div>
-    <div class="edit-hint" style="margin-bottom:8px;padding:0 4px">✏️ Clique em qualquer nome de matéria, tópico ou sub-assunto para editar diretamente.</div>
+    <div class="edit-hint">✏️ Clique em qualquer nome para editar. Sub-assuntos também têm revisão espaçada própria.</div>
     <div id="listaMaterias"></div>
   </div>
 
@@ -203,6 +216,7 @@ input:focus,select:focus{border-color:var(--green)}
       <input type="text" id="editalAssunto" placeholder="Assunto">
       <button class="btn primary" style="width:100%" onclick="addEdital()">Adicionar assunto</button>
     </div>
+    <div class="edit-hint">✏️ Clique em qualquer texto para editar.</div>
     <div id="editalProgress" style="margin-bottom:10px"></div>
     <div id="listaEdital"></div>
   </div>
@@ -220,28 +234,45 @@ input:focus,select:focus{border-color:var(--green)}
   <!-- POMODORO -->
   <div class="page" id="page-pomodoro">
     <div class="card">
-      <div class="pomo-settings">
-        <div class="pomo-set-group">
-          <label>Foco (min)</label>
-          <input type="number" id="pomoFocoSet" value="25" min="1" max="120" onchange="resetPomo()">
+      <div class="pomo-tabs">
+        <button class="pomo-tab active" onclick="switchPomo('timer',this)">⏱ Pomodoro</button>
+        <button class="pomo-tab" onclick="switchPomo('crono',this)">🕐 Cronômetro</button>
+      </div>
+
+      <!-- POMODORO TIMER -->
+      <div class="pomo-panel active" id="panel-timer">
+        <div class="pomo-settings">
+          <div class="pomo-set-group"><label>Foco (min)</label><input type="number" id="pomoFocoSet" value="25" min="1" max="120" onchange="resetPomo()"></div>
+          <div class="pomo-set-group"><label>Pausa (min)</label><input type="number" id="pomoBreakSet" value="5" min="1" max="60" onchange="resetPomo()"></div>
         </div>
-        <div class="pomo-set-group">
-          <label>Pausa (min)</label>
-          <input type="number" id="pomoBreakSet" value="5" min="1" max="60" onchange="resetPomo()">
+        <div class="pomo-display">
+          <div class="pomo-time" id="pomoTime">25:00</div>
+          <div class="pomo-label" id="pomoLabel">🎯 Foco</div>
+          <div class="pomo-btns">
+            <button class="btn primary" id="pomoBtn" onclick="togglePomo()">▶ Iniciar</button>
+            <button class="btn" onclick="resetPomo()">↺ Resetar</button>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="flex" style="justify-content:center;gap:20px">
+          <div class="metric" style="min-width:100px"><span class="val" id="pomoSessions">0</span><span class="lbl">sessões hoje</span></div>
+          <div class="metric" style="min-width:100px"><span class="val" id="pomoMinutes">0</span><span class="lbl">min. estudados</span></div>
         </div>
       </div>
-      <div class="pomo-display">
-        <div class="pomo-time" id="pomoTime">25:00</div>
-        <div class="pomo-label" id="pomoLabel">🎯 Foco</div>
-        <div class="pomo-btns">
-          <button class="btn primary" id="pomoBtn" onclick="togglePomo()">▶ Iniciar</button>
-          <button class="btn" onclick="resetPomo()">↺ Resetar</button>
+
+      <!-- CRONÔMETRO LIVRE -->
+      <div class="pomo-panel" id="panel-crono">
+        <div class="pomo-display" style="padding:1rem 0">
+          <div class="crono-time" id="cronoTime">00:00:00</div>
+          <div class="pomo-label" id="cronoLabel">Pronto para iniciar</div>
+          <div class="pomo-btns">
+            <button class="btn primary" id="cronoBtn" onclick="toggleCrono()">▶ Iniciar</button>
+            <button class="btn" onclick="lapCrono()">📍 Marcar</button>
+            <button class="btn" onclick="resetCrono()">↺ Zerar</button>
+          </div>
         </div>
-      </div>
-      <hr class="divider">
-      <div class="flex" style="justify-content:center;gap:20px">
-        <div class="metric" style="min-width:100px"><span class="val" id="pomoSessions">0</span><span class="lbl">sessões hoje</span></div>
-        <div class="metric" style="min-width:100px"><span class="val" id="pomoMinutes">0</span><span class="lbl">min. estudados</span></div>
+        <div class="crono-total" id="cronoTotal"></div>
+        <div class="crono-laps" id="cronoLaps"></div>
       </div>
     </div>
   </div>
@@ -264,11 +295,15 @@ input:focus,select:focus{border-color:var(--green)}
   <div class="modal">
     <h3>Adicionar tópico</h3>
     <input type="text" id="topicoNome" placeholder="Nome do assunto/tópico">
-    <div class="row"><label>Método</label>
-      <select id="topicoMetodo">
-        <option value="nova">📘 Matéria nova</option>
-        <option value="revisao">🔄 Revisão</option>
+    <div class="row"><label>Tem revisão própria?</label>
+      <select id="topicoTemRevisao">
+        <option value="sim">✅ Sim — revisar este tópico</option>
+        <option value="nao">📂 Não — só agrupar sub-assuntos</option>
       </select>
+    </div>
+    <div id="topicoRevisaoFields">
+    <div class="row"><label>Método</label>
+      <select id="topicoMetodo"><option value="nova">📘 Matéria nova</option><option value="revisao">🔄 Revisão</option></select>
     </div>
     <div class="row"><label>Recursos usados</label>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -280,6 +315,7 @@ input:focus,select:focus{border-color:var(--green)}
     <div class="row"><label>Total de questões</label><input type="number" id="topicoQtdQ" min="0" value="0" style="margin:0" oninput="calcPct()"></div>
     <div class="row"><label>Questões certas</label><input type="number" id="topicoAcertosQ" min="0" value="0" style="margin:0" oninput="calcPct()"></div>
     <div id="pctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    </div><!-- end topicoRevisaoFields -->
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
       <button class="btn" onclick="closeModal()">Cancelar</button>
       <button class="btn primary" onclick="saveTopico()">Salvar</button>
@@ -309,7 +345,53 @@ input:focus,select:focus{border-color:var(--green)}
   </div>
 </div>
 
+<!-- MODAL: Revisar sub-assunto -->
+<div class="modal-overlay" id="modalRevSub">
+  <div class="modal">
+    <h3>Revisar sub-assunto</h3>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:var(--radius-sm)" id="revSubInfo"></div>
+    <div class="row"><label>Total de questões</label><input type="number" id="revSubQtdQ" min="0" value="0" style="margin:0" oninput="calcRevSubPct()"></div>
+    <div class="row"><label>Questões certas</label><input type="number" id="revSubAcertosQ" min="0" value="0" style="margin:0" oninput="calcRevSubPct()"></div>
+    <div id="revSubPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+      <button class="btn primary" onclick="saveRevSub()">Salvar</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// ==================== REVISÃO ESPAÇADA INTELIGENTE ====================
+// Sequência: 1 → 5 → 7 → 14 → 30 dias
+const SEQ=[1,5,7,14,30];
+function getSeqIdx(dias){
+  // encontra o índice mais próximo na sequência
+  if(!dias||dias<=0)return 0;
+  for(let i=SEQ.length-1;i>=0;i--){if(dias>=SEQ[i])return i;}
+  return 0;
+}
+function nextInterval(acertos,intervalAtual){
+  const idx=getSeqIdx(intervalAtual||1);
+  let nextIdx;
+  if(acertos>=80){
+    // pula um intervalo
+    nextIdx=Math.min(idx+2,SEQ.length-1);
+  } else if(acertos>=60){
+    // avança normalmente
+    nextIdx=Math.min(idx+1,SEQ.length-1);
+  } else {
+    // volta um intervalo
+    nextIdx=Math.max(idx-1,0);
+  }
+  return SEQ[nextIdx];
+}
+function nextRevDate(acertos,intervalAtual){
+  const dias=nextInterval(acertos,intervalAtual);
+  const t=new Date();t.setDate(t.getDate()+dias);
+  return{date:t.toISOString().slice(0,10),dias};
+}
+
+// ==================== EDITAL ====================
 const EDITAL_PADRAO=[
   {materia:"Língua Portuguesa",assunto:"Gêneros e Tipos Textuais: características, funcionalidades e sequências (narrativa, descritiva, argumentativa, injuntiva)"},
   {materia:"Língua Portuguesa",assunto:"Compreensão e Interpretação: identificação de ideias principais, inferências e pressupostos"},
@@ -367,7 +449,7 @@ function renderFrase(){
   document.getElementById('fraseAutor').textContent=f.a?'— '+f.a:'';
 }
 
-function emptyData(){return{materias:[],metas:[],edital:[],streak:{count:0,lastDate:''},sessions:{},pomMinutes:{}};}
+function emptyData(){return{materias:[],metas:[],edital:[],streak:{count:0,lastDate:''},sessions:{},pomMinutes:{},cronoTotal:0};}
 let data=emptyData();
 function save(){localStorage.setItem('cp_data',JSON.stringify(data));}
 function loadData(){
@@ -381,7 +463,6 @@ function loadData(){
 function todayStr(){return new Date().toISOString().slice(0,10)}
 function fmtDate(s){if(!s)return'';return new Date(s+'T00:00:00').toLocaleDateString('pt-BR')}
 function daysDiff(s){return Math.round((new Date(s+'T00:00:00')-new Date(todayStr()+'T00:00:00'))/(1000*86400))}
-function nextRevDate(ac){const t=new Date();t.setDate(t.getDate()+(ac>=90?7:ac>=70?3:ac>=50?1:0));return t.toISOString().slice(0,10)}
 function calcPct(){
   const q=parseInt(document.getElementById('topicoQtdQ').value)||0;
   const a=parseInt(document.getElementById('topicoAcertosQ').value)||0;
@@ -392,11 +473,18 @@ function calcRevPct(){
   const a=parseInt(document.getElementById('revAcertosQ').value)||0;
   document.getElementById('revPctPreview').textContent='Porcentagem: '+(q>0?Math.round(a/q*100)+'%':'—');
 }
+function calcRevSubPct(){
+  const q=parseInt(document.getElementById('revSubQtdQ').value)||0;
+  const a=parseInt(document.getElementById('revSubAcertosQ').value)||0;
+  document.getElementById('revSubPctPreview').textContent='Porcentagem: '+(q>0?Math.round(a/q*100)+'%':'—');
+}
 function updateStreak(){
   const today=todayStr(),st=data.streak;if(st.lastDate===today)return;
   const y=new Date();y.setDate(y.getDate()-1);
   st.count=st.lastDate===y.toISOString().slice(0,10)?st.count+1:1;st.lastDate=today;
 }
+
+// ==================== DOMÍNIO ====================
 function calcDominio(t){
   const rev=t.revisoes||1,ac=t.acertos||0;
   const score=Math.round(ac*0.7+Math.min(rev/5,1)*100*0.3);
@@ -424,6 +512,7 @@ function revBadge(ds){
   if(d<=3)return`<span class="badge soon">Em ${d}d</span>`;
   return`<span class="badge ok">Em ${d}d</span>`;
 }
+function intBadge(dias){return`<span class="int-badge">🗓 ${dias}d</span>`;}
 function recursosTags(t){
   const r=[];if(t.video)r.push('🎥');if(t.questoes)r.push('❓');if(t.pdf)r.push('📄');
   return r.length?`<span style="font-size:12px">${r.join(' ')}</span>`:'';
@@ -441,22 +530,15 @@ function showPage(id,btn){
 
 // ==================== EDIÇÃO INLINE ====================
 function startEdit(el,onSave){
-  const oldVal=el.textContent;
+  const oldVal=el.textContent.replace(/ ✏️$/,'').trim();
   const inp=document.createElement('input');
   inp.className='inline-edit-input';
-  inp.value=oldVal;
-  el.replaceWith(inp);
-  inp.focus();
-  inp.select();
+  inp.value=oldVal;inp.style.minWidth='120px';
+  el.replaceWith(inp);inp.focus();inp.select();
   function finish(){
     const newVal=inp.value.trim()||oldVal;
-    const span=document.createElement('span');
-    span.className=el.className;
-    span.textContent=newVal;
-    inp.replaceWith(span);
+    el.textContent=newVal;inp.replaceWith(el);
     onSave(newVal);
-    // re-attach click
-    span.onclick=el.onclick;
   }
   inp.onblur=finish;
   inp.onkeydown=e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){inp.value=oldVal;inp.blur();}};
@@ -477,24 +559,35 @@ function openAddTopico(mi){
   curMat=mi;
   ['topicoNome','topicoQtdQ','topicoAcertosQ'].forEach(id=>document.getElementById(id).value=id==='topicoNome'?'':'0');
   document.getElementById('topicoMetodo').value='nova';
+  document.getElementById('topicoTemRevisao').value='sim';
+  document.getElementById('topicoRevisaoFields').style.display='block';
   ['resVideo','resQuestoes','resPdf'].forEach(id=>document.getElementById(id).checked=false);
   document.getElementById('pctPreview').textContent='Porcentagem: —';
   document.getElementById('modalTopico').classList.add('open');
 }
+document.addEventListener('change',e=>{
+  if(e.target.id==='topicoTemRevisao'){
+    document.getElementById('topicoRevisaoFields').style.display=e.target.value==='sim'?'block':'none';
+  }
+});
 function saveTopico(){
   const nome=document.getElementById('topicoNome').value.trim();if(!nome)return;
-  const metodo=document.getElementById('topicoMetodo').value;
-  const qtdQ=parseInt(document.getElementById('topicoQtdQ').value)||0;
-  const acertosQ=parseInt(document.getElementById('topicoAcertosQ').value)||0;
+  const temRevisao=document.getElementById('topicoTemRevisao').value==='sim';
+  const metodo=temRevisao?document.getElementById('topicoMetodo').value:'nova';
+  const qtdQ=temRevisao?(parseInt(document.getElementById('topicoQtdQ').value)||0):0;
+  const acertosQ=temRevisao?(parseInt(document.getElementById('topicoAcertosQ').value)||0):0;
   const acertos=qtdQ>0?Math.round(acertosQ/qtdQ*100):70;
+  const rev=nextRevDate(acertos,1);
   data.materias[curMat].topicos.push({
-    nome,acertos,metodo,qtdQ,acertosQ,
-    video:document.getElementById('resVideo').checked,
-    questoes:document.getElementById('resQuestoes').checked,
-    pdf:document.getElementById('resPdf').checked,
-    dataEstudo:todayStr(),proximaRevisao:nextRevDate(acertos),revisoes:1,
-    subAssuntos:[],
-    historico:[{data:todayStr(),acertos,metodo}]
+    nome,acertos,metodo,qtdQ,acertosQ,temRevisao,
+    video:temRevisao&&document.getElementById('resVideo').checked,
+    questoes:temRevisao&&document.getElementById('resQuestoes').checked,
+    pdf:temRevisao&&document.getElementById('resPdf').checked,
+    dataEstudo:todayStr(),
+    proximaRevisao:temRevisao?rev.date:null,
+    intervalAtual:temRevisao?rev.dias:null,
+    revisoes:temRevisao?1:0,
+    subAssuntos:[],historico:temRevisao?[{data:todayStr(),acertos,metodo}]:[]
   });
   updateStreak();save();closeModal();renderMaterias();
 }
@@ -509,7 +602,12 @@ function addSubAssunto(mi,ti){
   const inp=document.getElementById(`sub_inp_${mi}_${ti}`);
   const v=inp.value.trim();if(!v)return;
   if(!data.materias[mi].topicos[ti].subAssuntos)data.materias[mi].topicos[ti].subAssuntos=[];
-  data.materias[mi].topicos[ti].subAssuntos.push({texto:v,done:false});
+  const rev=nextRevDate(70,1);
+  data.materias[mi].topicos[ti].subAssuntos.push({
+    texto:v,done:false,acertos:70,revisoes:1,
+    proximaRevisao:rev.date,intervalAtual:rev.dias,
+    dataEstudo:todayStr()
+  });
   inp.value='';save();renderMaterias();
 }
 function toggleSubAssunto(mi,ti,si){
@@ -522,6 +620,26 @@ function deleteSubAssunto(mi,ti,si){
 function editSubAssunto(mi,ti,si){
   const el=document.getElementById(`sub_txt_${mi}_${ti}_${si}`);
   startEdit(el,newVal=>{data.materias[mi].topicos[ti].subAssuntos[si].texto=newVal;save();});
+}
+let curRevSubMat=null,curRevSubTop=null,curRevSubSub=null;
+function openRevSubModal(mi,ti,si){
+  curRevSubMat=mi;curRevSubTop=ti;curRevSubSub=si;
+  const s=data.materias[mi].topicos[ti].subAssuntos[si];
+  document.getElementById('revSubInfo').textContent=s.texto+' · Intervalo atual: '+(s.intervalAtual||1)+'d · Acertos: '+(s.acertos||70)+'%';
+  document.getElementById('revSubQtdQ').value=0;
+  document.getElementById('revSubAcertosQ').value=0;
+  document.getElementById('revSubPctPreview').textContent='Porcentagem: —';
+  document.getElementById('modalRevSub').classList.add('open');
+}
+function saveRevSub(){
+  const qtdQ=parseInt(document.getElementById('revSubQtdQ').value)||0;
+  const acertosQ=parseInt(document.getElementById('revSubAcertosQ').value)||0;
+  const acertos=qtdQ>0?Math.round(acertosQ/qtdQ*100):80;
+  const s=data.materias[curRevSubMat].topicos[curRevSubTop].subAssuntos[curRevSubSub];
+  const rev=nextRevDate(acertos,s.intervalAtual||1);
+  s.acertos=acertos;s.proximaRevisao=rev.date;s.intervalAtual=rev.dias;
+  s.revisoes=(s.revisoes||1)+1;s.dataEstudo=todayStr();
+  updateStreak();save();closeModal();renderMaterias();
 }
 
 function renderMaterias(){
@@ -542,31 +660,38 @@ function renderMaterias(){
         const dom=calcDominio(t);const bc=dom.nivel==='Forte'?'#639922':dom.nivel==='Médio'?'#EF9F27':'#E24B4A';
         const subs=t.subAssuntos||[];
         const subsDone=subs.filter(s=>s.done).length;
+        const subsHoje=subs.filter(s=>s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0).length;
+        const temRev=t.temRevisao!==false;
         return`<div class="item">
-          <div class="flex">${dominioRing(t)}<div style="flex:1;min-width:0">
+          <div class="flex">${temRev?dominioRing(t):`<div style="width:36px;height:36px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📂</div>`}<div style="flex:1;min-width:0">
             <div class="flex" style="flex-wrap:wrap;gap:4px">
               <span id="top_nome_${mi}_${ti}" class="editavel item-title" onclick="editTopicoNome(${mi},${ti})">${t.nome}</span>
-              ${metodoBadge(t.metodo||'nova')} ${recursosTags(t)}
+              ${temRev?metodoBadge(t.metodo||'nova'):'<span class="tag">Agrupador</span>'} ${temRev?recursosTags(t):''}
               <div class="spacer"></div>
-              ${dominioBadge(t)}
-              <button class="btn sm" onclick="openRevModal(${mi},${ti})">Revisar</button>
+              ${temRev?dominioBadge(t)+' '+intBadge(t.intervalAtual||1):''}
+              ${temRev?`<button class="btn sm" onclick="openRevModal(${mi},${ti})">Revisar</button>`:''}
               <button class="btn sm danger" onclick="deleteTopico(${mi},${ti})">✕</button>
             </div>
-            <div class="item-sub">Acertos: ${t.acertos}% · ${t.qtdQ||0} questões · ${t.revisoes||1} rev. · Próx: ${fmtDate(t.proximaRevisao)} ${revBadge(t.proximaRevisao)}</div>
-            <div class="acerto-bar"><div class="acerto-fill" style="width:${t.acertos}%;background:${bc}"></div></div>
+            ${temRev?`<div class="item-sub">Acertos: ${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1} rev. · Próx: ${fmtDate(t.proximaRevisao)} ${revBadge(t.proximaRevisao)}</div>`:`<div class="item-sub">${subs.length} sub-assunto${subs.length!==1?'s':''} · clique em + para adicionar</div>`}
+            ${temRev?`<div class="acerto-bar"><div class="acerto-fill" style="width:${t.acertos}%;background:${bc}"></div></div>`:''}
           </div></div>
           <div class="sub-assuntos">
-            ${subs.map((s,si)=>`
-              <div class="sub-assunto-item">
+            ${subs.map((s,si)=>{
+              const sRev=s.proximaRevisao?daysDiff(s.proximaRevisao):null;
+              const sRevBadge=sRev!==null?(sRev<=0?`<span class="sub-rev-badge" style="background:var(--red-bg);color:var(--red-txt)">Rev hoje</span>`:`<span class="sub-rev-badge" style="background:var(--blue-bg);color:var(--blue-txt)">${sRev}d</span>`):'';
+              return`<div class="sub-assunto-item">
                 <div class="checkbox ${s.done?'done':''}" style="width:15px;height:15px;font-size:9px" onclick="toggleSubAssunto(${mi},${ti},${si})">${s.done?'✓':''}</div>
                 <span id="sub_txt_${mi}_${ti}_${si}" class="sub-assunto-text editavel" style="${s.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSubAssunto(${mi},${ti},${si})">${s.texto}</span>
+                ${sRevBadge}
+                <button class="btn sm" style="padding:2px 6px;background:var(--green-bg);color:var(--green-txt);border-color:var(--green-bg)" onclick="openRevSubModal(${mi},${ti},${si})">Rev</button>
                 <button class="btn sm" onclick="deleteSubAssunto(${mi},${ti},${si})" style="color:var(--text2);padding:2px 6px">✕</button>
-              </div>`).join('')}
+              </div>`;
+            }).join('')}
             <div class="sub-assunto-add">
               <input type="text" id="sub_inp_${mi}_${ti}" placeholder="+ Adicionar sub-assunto..." onkeydown="if(event.key==='Enter')addSubAssunto(${mi},${ti})">
               <button class="btn sm primary" onclick="addSubAssunto(${mi},${ti})">+</button>
             </div>
-            ${subs.length?`<div style="font-size:10px;color:var(--text2);margin-top:3px">${subsDone}/${subs.length} concluídos</div>`:''}
+            ${subs.length?`<div style="font-size:10px;color:var(--text2);margin-top:3px">${subsDone}/${subs.length} concluídos${subsHoje?' · <span style="color:var(--red-txt);font-weight:600">'+subsHoje+' para revisar hoje</span>':''}</div>`:''}
           </div>
         </div>`;
       }).join(''):'<div style="padding:6px 0;font-size:12px;color:var(--text3)">Nenhum tópico ainda</div>'}
@@ -580,7 +705,8 @@ function setRevTab(t,btn){revTab=t;document.querySelectorAll('.tab-sub button').
 let curRevMat=null,curRevTop=null;
 function openRevModal(mi,ti){
   curRevMat=mi;curRevTop=ti;
-  document.getElementById('revisaoInfo').textContent=data.materias[mi].topicos[ti].nome+' — '+data.materias[mi].nome;
+  const t=data.materias[mi].topicos[ti];
+  document.getElementById('revisaoInfo').textContent=t.nome+' — '+data.materias[mi].nome+' · Intervalo atual: '+(t.intervalAtual||1)+'d';
   ['revQtdQ','revAcertosQ'].forEach(id=>document.getElementById(id).value=0);
   ['revResVideo','revResQuestoes','revResPdf'].forEach(id=>document.getElementById(id).checked=false);
   document.getElementById('revPctPreview').textContent='Porcentagem: —';
@@ -591,13 +717,14 @@ function saveRevisao(){
   const acertosQ=parseInt(document.getElementById('revAcertosQ').value)||0;
   const acertos=qtdQ>0?Math.round(acertosQ/qtdQ*100):80;
   const t=data.materias[curRevMat].topicos[curRevTop];
+  const rev=nextRevDate(acertos,t.intervalAtual||1);
   t.acertos=acertos;t.qtdQ=(t.qtdQ||0)+qtdQ;t.acertosQ=(t.acertosQ||0)+acertosQ;
   t.video=t.video||document.getElementById('revResVideo').checked;
   t.questoes=t.questoes||document.getElementById('revResQuestoes').checked;
   t.pdf=t.pdf||document.getElementById('revResPdf').checked;
-  t.dataEstudo=todayStr();t.proximaRevisao=nextRevDate(acertos);t.revisoes=(t.revisoes||1)+1;
+  t.dataEstudo=todayStr();t.proximaRevisao=rev.date;t.intervalAtual=rev.dias;t.revisoes=(t.revisoes||1)+1;
   if(!t.historico)t.historico=[];
-  t.historico.push({data:todayStr(),acertos,metodo:'revisao'});
+  t.historico.push({data:todayStr(),acertos,metodo:'revisao',intervalo:rev.dias});
   updateStreak();
   const h=data.sessions[todayStr()]||{mins:0,revisoes:0};h.revisoes++;data.sessions[todayStr()]=h;
   save();closeModal();renderAll();
@@ -605,13 +732,36 @@ function saveRevisao(){
 function renderRevisoes(){
   const el=document.getElementById('listaRevisoes');
   let items=[];
-  data.materias.forEach((m,mi)=>m.topicos.forEach((t,ti)=>items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao)})));
+  data.materias.forEach((m,mi)=>{
+    m.topicos.forEach((t,ti)=>{
+      if(t.temRevisao!==false)items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao),tipo:'topico'});
+      (t.subAssuntos||[]).forEach((s,si)=>{
+        if(s.proximaRevisao)items.push({m,t,s,mi,ti,si,diff:daysDiff(s.proximaRevisao),tipo:'sub'});
+      });
+    });
+  });
   let f=revTab==='hoje'?items.filter(x=>x.diff<=0):revTab==='proximas'?items.filter(x=>x.diff>0).sort((a,b)=>a.diff-b.diff):items.sort((a,b)=>a.diff-b.diff);
   if(!f.length){el.innerHTML=`<div class="empty">Nenhuma revisão ${revTab==='hoje'?'para hoje 🎉':'encontrada'}!</div>`;return;}
-  el.innerHTML=f.map(x=>`<div class="card" style="margin-bottom:8px"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${dominioBadge(x.t)} ${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} · ${x.t.revisoes||1} rev. · ${x.t.acertos}%</div></div></div></div>`).join('');
+  el.innerHTML=f.map(x=>{
+    if(x.tipo==='topico')return`<div class="card" style="margin-bottom:8px"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${dominioBadge(x.t)} ${intBadge(x.t.intervalAtual||1)} ${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} · ${x.t.revisoes||1} rev. · ${x.t.acertos}%</div></div></div></div>`;
+    return`<div class="card" style="margin-bottom:8px;border-left:3px solid var(--green)"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.s.texto}</span><div class="spacer"></div>${intBadge(x.s.intervalAtual||1)} ${revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSubModal(${x.mi},${x.ti},${x.si})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.t.nome} · sub-assunto · ${x.s.acertos||70}%</div></div></div></div>`;
+  }).join('');
 }
 
 // EDITAL
+let editalGrupoOpen={};
+let editalOpen={};
+function toggleEditalGrupo(mat){
+  editalGrupoOpen[mat]=editalGrupoOpen[mat]===false?true:false;
+  renderEdital();
+}
+function toggleEditalOpen(i){
+  editalOpen[i]=!editalOpen[i];
+  const panel=document.getElementById(`edital_sub_panel_${i}`);
+  const btn=document.querySelector(`button[onclick="toggleEditalOpen(${i})"]`);
+  if(panel)panel.style.display=editalOpen[i]?'block':'none';
+  if(btn)btn.textContent=editalOpen[i]?'−':'+';
+}
 function addEdital(){
   const mat=document.getElementById('editalMateria').value.trim();
   const ass=document.getElementById('editalAssunto').value.trim();
@@ -621,6 +771,28 @@ function addEdital(){
 }
 function toggleEdital(i){data.edital[i].done=!data.edital[i].done;save();renderEdital();}
 function deleteEdital(i){data.edital.splice(i,1);save();renderEdital();}
+function editEditalAssunto(i){
+  const el=document.getElementById(`edital_txt_${i}`);
+  startEdit(el,newVal=>{data.edital[i].assunto=newVal;save();});
+}
+function addEditalSub(i){
+  const inp=document.getElementById(`edital_sub_inp_${i}`);
+  const v=inp.value.trim();if(!v)return;
+  if(!data.edital[i].subAssuntos)data.edital[i].subAssuntos=[];
+  data.edital[i].subAssuntos.push({texto:v,done:false});
+  inp.value='';save();renderEdital();
+}
+function toggleEditalSub(i,si){
+  data.edital[i].subAssuntos[si].done=!data.edital[i].subAssuntos[si].done;
+  save();renderEdital();
+}
+function deleteEditalSub(i,si){
+  data.edital[i].subAssuntos.splice(si,1);save();renderEdital();
+}
+function editEditalSub(i,si){
+  const el=document.getElementById(`edital_sub_txt_${i}_${si}`);
+  startEdit(el,newVal=>{data.edital[i].subAssuntos[si].texto=newVal;save();});
+}
 function renderEdital(){
   const el=document.getElementById('listaEdital');
   const prog=document.getElementById('editalProgress');
@@ -631,18 +803,40 @@ function renderEdital(){
   data.edital.forEach((e,i)=>{if(!grupos[e.materia])grupos[e.materia]=[];grupos[e.materia].push({...e,i});});
   el.innerHTML=Object.entries(grupos).map(([mat,items])=>{
     const doneG=items.filter(e=>e.done).length,pctG=Math.round(doneG/items.length*100);
+    const isOpen=editalGrupoOpen[mat]!==false;
     return`<div class="card">
-      <div class="flex" style="margin-bottom:6px">
+      <div class="flex" style="margin-bottom:${isOpen?'6px':'0'}">
         <span style="font-size:14px;font-weight:600">${mat}</span>
         <div class="spacer"></div>
         <span class="tag">${doneG}/${items.length} — ${pctG}%</span>
+        <button onclick="toggleEditalGrupo('${mat.replace(/'/g,"\\'")}')" style="background:none;border:1px solid var(--border);border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:11px;color:var(--text2);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">${isOpen?'−':'+'}</button>
       </div>
-      <div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${pctG}%"></div></div>
-      ${items.map(e=>`<div class="edital-item ${e.done?'done':''}">
-        <div class="checkbox ${e.done?'done':''}" onclick="toggleEdital(${e.i})">${e.done?'✓':''}</div>
-        <span class="edital-item-text">${e.assunto}</span>
-        <button class="btn sm" onclick="deleteEdital(${e.i})" style="color:var(--text2);flex-shrink:0">✕</button>
-      </div>`).join('')}
+      ${isOpen?`<div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${pctG}%"></div></div>`:''}
+      ${isOpen?items.map(e=>{
+        const subs=e.subAssuntos||[];
+        const subsDone=subs.filter(s=>s.done).length;
+        const isOpen=editalOpen[e.i]===true;
+        return`<div>
+          <div class="edital-item ${e.done?'done':''}">
+            <div class="checkbox ${e.done?'done':''}" onclick="toggleEdital(${e.i})">${e.done?'✓':''}</div>
+            <span id="edital_txt_${e.i}" class="edital-item-text editavel" onclick="editEditalAssunto(${e.i})">${e.assunto}</span>
+            ${subs.length?`<span style="font-size:10px;color:var(--text2);white-space:nowrap">${subsDone}/${subs.length}</span>`:''}
+            <button onclick="toggleEditalOpen(${e.i})" style="background:none;border:1px solid var(--border);border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:12px;color:var(--text2);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;line-height:1" title="Sub-tópicos">${isOpen?'−':'+'}</button>
+            <button class="btn sm" onclick="deleteEdital(${e.i})" style="color:var(--text2);flex-shrink:0">✕</button>
+          </div>
+          <div id="edital_sub_panel_${e.i}" style="margin-left:32px;border-left:2px solid var(--border);padding-left:10px;margin-bottom:4px;${isOpen?'':'display:none'}">
+            ${subs.map((s,si)=>`<div class="sub-assunto-item">
+              <div class="checkbox ${s.done?'done':''}" style="width:15px;height:15px;font-size:9px" onclick="toggleEditalSub(${e.i},${si})">${s.done?'✓':''}</div>
+              <span id="edital_sub_txt_${e.i}_${si}" class="sub-assunto-text editavel" style="${s.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editEditalSub(${e.i},${si})">${s.texto}</span>
+              <button class="btn sm" onclick="deleteEditalSub(${e.i},${si})" style="color:var(--text2);padding:2px 6px">✕</button>
+            </div>`).join('')}
+            <div class="sub-assunto-add">
+              <input type="text" id="edital_sub_inp_${e.i}" placeholder="+ Sub-tópico (C1, C2...)" onkeydown="if(event.key==='Enter')addEditalSub(${e.i})">
+              <button class="btn sm primary" onclick="addEditalSub(${e.i})">+</button>
+            </div>
+          </div>
+        </div>`;
+      }).join(''):''}
     </div>`;
   }).join('');
 }
@@ -668,10 +862,13 @@ let weekChartInst=null;
 function renderDash(){
   renderFrase();
   const today=todayStr(),revHoje=[];
-  data.materias.forEach((m,mi)=>m.topicos.forEach((t,ti)=>{if(daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti});}));
+  data.materias.forEach((m,mi)=>{
+    m.topicos.forEach((t,ti)=>{if(t.temRevisao!==false&&daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti,tipo:'topico'});});
+    m.topicos.forEach((t,ti)=>{(t.subAssuntos||[]).forEach((s,si)=>{if(s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0)revHoje.push({m,t,s,mi,ti,si,tipo:'sub'});});});
+  });
   const metasHoje=data.metas.filter(m=>m.data===today);
   const metasDone=metasHoje.filter(m=>m.done).length;
-  const pomMin=data.pomMinutes[today]||0;
+  const pomMin=(data.pomMinutes[today]||0)+(Math.floor((data.cronoTotal||0)/60));
   const editalDone=data.edital.filter(e=>e.done).length;
   document.getElementById('dashMetrics').innerHTML=`
     <div class="metric"><span class="val">${revHoje.length}</span><span class="lbl">Revisões hoje</span></div>
@@ -680,7 +877,10 @@ function renderDash(){
     <div class="metric"><span class="val">${editalDone}/${data.edital.length}</span><span class="lbl">Edital</span></div>`;
   const dr=document.getElementById('dashRevisoes');
   if(!revHoje.length){dr.innerHTML='<div class="empty" style="padding:1rem 0">✅ Sem revisões hoje!</div>';}
-  else dr.innerHTML=revHoje.slice(0,4).map(x=>`<div class="item"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} ${dominioBadge(x.t)}</div></div></div></div>`).join('')+(revHoje.length>4?`<div style="text-align:center;padding:6px;font-size:11px;color:var(--text2)">+${revHoje.length-4} mais</div>`:'');
+  else dr.innerHTML=revHoje.slice(0,5).map(x=>{
+    if(x.tipo==='topico')return`<div class="item"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} ${dominioBadge(x.t)}</div></div></div></div>`;
+    return`<div class="item"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">📌 ${x.s.texto}</span><div class="spacer"></div>${revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSubModal(${x.mi},${x.ti},${x.si})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.t.nome}</div></div></div></div>`;
+  }).join('')+(revHoje.length>5?`<div style="text-align:center;padding:6px;font-size:11px;color:var(--text2)">+${revHoje.length-5} mais</div>`:'');
   const dm=document.getElementById('dashMetas');
   if(!metasHoje.length){dm.innerHTML='<div class="empty" style="padding:1rem 0">Nenhuma meta hoje</div>';}
   else{
@@ -754,9 +954,9 @@ function renderStats(){
     const totalC=m.topicos.reduce((a,t)=>a+(t.acertosQ||0),0);
     return`<div class="item"><div class="flex" style="flex-wrap:wrap;gap:4px;margin-bottom:6px"><span class="item-title">${m.nome}</span><div class="spacer"></div><span class="dominio-badge ${dm.cls}">${dm.emoji} ${dm.nivel}</span></div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:5px;margin-bottom:5px">
-        ${m.topicos.map(t=>{const d=calcDominio(t);const subs=t.subAssuntos||[];return`<div style="display:flex;align-items:flex-start;gap:5px;background:var(--bg);border-radius:var(--radius-sm);padding:6px 9px;"><span style="margin-top:1px">${d.emoji}</span><div style="min-width:0;flex:1"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nome}</div><div style="font-size:10px;color:var(--text2)">${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1}rev${subs.length?' · '+subs.filter(s=>s.done).length+'/'+subs.length+' sub':''}</div></div></div>`;}).join('')}
+        ${m.topicos.map(t=>{const d=calcDominio(t);return`<div style="display:flex;align-items:flex-start;gap:5px;background:var(--bg);border-radius:var(--radius-sm);padding:6px 9px;"><span>${d.emoji}</span><div style="min-width:0;flex:1"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nome}</div><div style="font-size:10px;color:var(--text2)">${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1}rev · ${t.intervalAtual||1}d</div></div></div>`;}).join('')}
       </div>
-      <div style="font-size:11px;color:var(--text2)">Média: ${avgAc}% · ${totalQ} questões (${totalC} certas · ${totalQ>0?Math.round(totalC/totalQ*100):0}%)</div>
+      <div style="font-size:11px;color:var(--text2)">Média: ${avgAc}% · ${totalQ} questões (${totalQ>0?Math.round(totalC/totalQ*100):0}% acertos)</div>
     </div>`;
   }).join('');
   const hEl=document.getElementById('statsHistorico');
@@ -765,11 +965,17 @@ function renderStats(){
   hEl.innerHTML=keys.map(d=>{const s=data.sessions[d],pm=data.pomMinutes[d]||0;return`<div class="item"><div class="flex"><span class="item-title">${fmtDate(d)}</span><div class="spacer"></div><span class="tag">${pm} min</span><span class="tag" style="margin-left:4px">${s.revisoes||0} revisões</span></div></div>`;}).join('');
 }
 
-// POMODORO
+// ==================== POMODORO ====================
 let pomoInterval=null,pomoRunning=false,pomoSeconds=0,pomoMode='focus',pomoSessHoje=0;
 function getFoco(){return(parseInt(document.getElementById('pomoFocoSet').value)||25)*60}
 function getBreak(){return(parseInt(document.getElementById('pomoBreakSet').value)||5)*60}
 function pomoFmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function switchPomo(tab,btn){
+  document.querySelectorAll('.pomo-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.pomo-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+}
 function togglePomo(){
   if(pomoRunning){clearInterval(pomoInterval);pomoRunning=false;document.getElementById('pomoBtn').textContent='▶ Continuar';}
   else{
@@ -796,6 +1002,65 @@ function resetPomo(){
   document.getElementById('pomoTime').textContent=pomoFmt(pomoSeconds);
   document.getElementById('pomoLabel').textContent='🎯 Foco';
   document.getElementById('pomoBtn').textContent='▶ Iniciar';
+}
+
+// ==================== CRONÔMETRO LIVRE ====================
+let cronoInterval=null,cronoRunning=false,cronoSecs=0,cronoLaps=[],cronoSessionStart=0;
+function cronoFmt(s){
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+}
+function toggleCrono(){
+  if(cronoRunning){
+    clearInterval(cronoInterval);cronoRunning=false;
+    document.getElementById('cronoBtn').textContent='▶ Continuar';
+    document.getElementById('cronoLabel').textContent='Pausado';
+    // salva minutos
+    const mins=Math.floor(cronoSecs/60);
+    const today=todayStr();
+    if(!data.pomMinutes[today])data.pomMinutes[today]=0;
+    data.pomMinutes[today]=Math.max(data.pomMinutes[today],mins);
+    save();
+  } else {
+    cronoRunning=true;
+    document.getElementById('cronoBtn').textContent='⏸ Pausar';
+    document.getElementById('cronoLabel').textContent='Contando...';
+    cronoInterval=setInterval(()=>{
+      cronoSecs++;
+      document.getElementById('cronoTime').textContent=cronoFmt(cronoSecs);
+      // atualiza minutos a cada minuto completo
+      if(cronoSecs%60===0){
+        const today=todayStr();
+        const mins=Math.floor(cronoSecs/60);
+        if(!data.pomMinutes[today])data.pomMinutes[today]=0;
+        data.pomMinutes[today]=Math.max(data.pomMinutes[today],mins);
+        save();
+        document.getElementById('pomoMinutes').textContent=data.pomMinutes[today]||0;
+      }
+      updateCronoTotal();
+    },1000);
+  }
+}
+function lapCrono(){
+  if(cronoSecs===0)return;
+  const label='Marcação '+(cronoLaps.length+1);
+  cronoLaps.push({label,time:cronoFmt(cronoSecs)});
+  renderCronoLaps();
+}
+function resetCrono(){
+  clearInterval(cronoInterval);cronoRunning=false;cronoSecs=0;cronoLaps=[];
+  document.getElementById('cronoTime').textContent='00:00:00';
+  document.getElementById('cronoLabel').textContent='Pronto para iniciar';
+  document.getElementById('cronoBtn').textContent='▶ Iniciar';
+  document.getElementById('cronoLaps').innerHTML='';
+  document.getElementById('cronoTotal').textContent='';
+}
+function updateCronoTotal(){
+  const mins=Math.floor(cronoSecs/60),secs=cronoSecs%60;
+  document.getElementById('cronoTotal').textContent=mins>0?`Total: ${mins}min ${secs}s`:'';
+}
+function renderCronoLaps(){
+  document.getElementById('cronoLaps').innerHTML=cronoLaps.slice().reverse().map(l=>`<div class="crono-lap"><span>${l.label}</span><span>${l.time}</span></div>`).join('');
 }
 
 function closeModal(){document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
