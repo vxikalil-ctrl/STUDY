@@ -44,15 +44,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .metric .val{font-size:24px;font-weight:700;display:block}
 .metric .lbl{font-size:11px;color:var(--text2);margin-top:3px;display:block}
 h2{font-size:15px;font-weight:600;margin-bottom:10px}
-h3{font-size:13px;font-weight:600;margin-bottom:8px}
 .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600}
 .badge.today{background:var(--today-bg);color:var(--today-txt)}
 .badge.late{background:var(--red-bg);color:var(--red-txt)}
 .badge.ok{background:var(--green-bg);color:var(--green-txt)}
 .badge.soon{background:var(--amber-bg);color:var(--amber-txt)}
-input[type=text],input[type=number],select,textarea{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:var(--surface);color:var(--text);margin-bottom:7px;outline:none;transition:.15s;font-family:inherit}
-input:focus,select:focus,textarea:focus{border-color:var(--green)}
-textarea{resize:vertical;min-height:70px}
+input[type=text],input[type=number],select{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;background:var(--surface);color:var(--text);margin-bottom:7px;outline:none;transition:.15s;font-family:inherit}
+input:focus,select:focus{border-color:var(--green)}
 .btn{padding:7px 14px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-size:13px;cursor:pointer;transition:.15s;font-weight:500}
 .btn:hover{background:var(--bg)}.btn:active{transform:scale(.98)}
 .btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
@@ -96,39 +94,41 @@ textarea{resize:vertical;min-height:70px}
 .score-fraco{background:var(--red-bg);color:var(--red-txt);border:2px solid var(--red)}
 .row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
 .row label{font-size:12px;color:var(--text2);white-space:nowrap;min-width:110px}
-.sync-bar{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 14px;margin-bottom:10px;font-size:12px}
-.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
-.sync-dot.ok{background:var(--green)}.sync-dot.saving{background:#EF9F27;animation:pulse 1s infinite}.sync-dot.err{background:var(--red)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-/* FRASE MOTIVACIONAL */
-.frase-card{background:linear-gradient(135deg,var(--green-bg),var(--blue-bg));border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:10px;position:relative;overflow:hidden}
-.frase-text{font-size:14px;font-weight:600;color:var(--green-txt);line-height:1.5;margin-bottom:4px}
+.frase-card{background:var(--green-bg);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:10px;position:relative}
+.frase-text{font-size:14px;font-weight:600;color:var(--green-txt);line-height:1.5;margin-bottom:4px;padding-right:28px}
 .frase-autor{font-size:11px;color:var(--text2)}
-.frase-btn{position:absolute;top:10px;right:12px;background:none;border:none;font-size:16px;cursor:pointer;opacity:.6}
+.frase-btn{position:absolute;top:10px;right:12px;background:none;border:none;font-size:16px;cursor:pointer;opacity:.5}
 .frase-btn:hover{opacity:1}
-/* EDITAL */
-.edital-mat{margin-bottom:10px}
-.edital-mat-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);cursor:pointer;border:1px solid var(--border)}
-.edital-mat-header:hover{background:var(--border)}
-.edital-items{padding:4px 0 4px 14px}
-.edital-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-bottom:1px solid var(--border);transition:.15s}
+.edital-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-bottom:1px solid var(--border)}
 .edital-item:last-child{border-bottom:none}
 .edital-item.done .edital-item-text{text-decoration:line-through;color:var(--text3)}
-.edital-item-text{font-size:13px;flex:1}
-.edital-progress{font-size:11px;color:var(--text2);white-space:nowrap}
-/* MÉTODO TAGS */
+.edital-item-text{font-size:13px;flex:1;line-height:1.4}
 .metodo-tag{display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:2px 7px;border-radius:20px;font-weight:600}
 .metodo-nova{background:var(--blue-bg);color:var(--blue-txt)}
 .metodo-rev{background:var(--amber-bg);color:var(--amber-txt)}
-/* POMO SETTINGS */
-.pomo-settings{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.pomo-settings{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
 .pomo-set-group{display:flex;flex-direction:column;align-items:center;gap:4px}
 .pomo-set-group label{font-size:11px;color:var(--text2)}
-.pomo-set-group input{width:70px;text-align:center;margin:0;padding:6px;font-size:16px;font-weight:700}
+.pomo-set-group input{width:72px;text-align:center;margin:0;padding:6px;font-size:16px;font-weight:700}
+/* SUB-ASSUNTOS */
+.sub-assuntos{margin-top:8px;margin-left:44px;border-left:2px solid var(--border);padding-left:10px}
+.sub-assunto-item{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border)}
+.sub-assunto-item:last-child{border-bottom:none}
+.sub-assunto-text{font-size:12px;flex:1;color:var(--text2)}
+.sub-assunto-add{display:flex;gap:6px;margin-top:6px}
+.sub-assunto-add input{margin:0;font-size:12px;padding:5px 8px}
+/* EDIÇÃO INLINE */
+.editavel{cursor:pointer;border-radius:4px;transition:.15s;padding:1px 3px;margin:-1px -3px}
+.editavel:hover{background:var(--amber-bg);color:var(--amber-txt)}
+.editavel:hover::after{content:' ✏️';font-size:10px;opacity:.6}
+.inline-edit-input{font-size:13px;font-weight:600;padding:3px 7px;border:1.5px solid var(--green);border-radius:5px;background:var(--surface);color:var(--text);outline:none;width:100%;font-family:inherit}
+.inline-edit-sub{font-size:12px;font-weight:400;padding:2px 6px;border:1.5px solid var(--green);border-radius:5px;background:var(--surface);color:var(--text);outline:none;flex:1;font-family:inherit}
+.edit-hint{font-size:10px;color:var(--text3);margin-top:4px}
 @media(max-width:600px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}
   .pomo-time{font-size:52px}
   .nav button{font-size:11px;padding:6px 4px}
+  .sub-assuntos{margin-left:10px}
 }
 @media(max-width:400px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
 </style>
@@ -144,13 +144,6 @@ textarea{resize:vertical;min-height:70px}
     <div style="font-size:12px;color:var(--text2);text-align:right" id="dateLabel"></div>
   </div>
 
-  <div class="sync-bar">
-    <div class="sync-dot" id="syncDot"></div>
-    <span id="syncMsg">Carregando...</span>
-    <div class="spacer"></div>
-    <button class="btn sm" onclick="syncSave()">💾 Salvar</button>
-  </div>
-
   <div class="nav">
     <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
     <button onclick="showPage('materias',this)">Matérias</button>
@@ -164,7 +157,7 @@ textarea{resize:vertical;min-height:70px}
   <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
     <div id="fraseCard" class="frase-card">
-      <button class="frase-btn" onclick="novaFrase()" title="Nova frase">🔄</button>
+      <button class="frase-btn" onclick="novaFrase()">🔄</button>
       <div class="frase-text" id="fraseText"></div>
       <div class="frase-autor" id="fraseAutor"></div>
     </div>
@@ -188,6 +181,7 @@ textarea{resize:vertical;min-height:70px}
         <button class="btn primary" onclick="addMateria()">Adicionar</button>
       </div>
     </div>
+    <div class="edit-hint" style="margin-bottom:8px;padding:0 4px">✏️ Clique em qualquer nome de matéria, tópico ou sub-assunto para editar diretamente.</div>
     <div id="listaMaterias"></div>
   </div>
 
@@ -206,7 +200,7 @@ textarea{resize:vertical;min-height:70px}
     <div class="card">
       <h2>Adicionar ao edital</h2>
       <input type="text" id="editalMateria" placeholder="Matéria (ex: Direito Constitucional)">
-      <input type="text" id="editalAssunto" placeholder="Assunto (ex: Art. 1 ao 10 — Princípios Fundamentais)">
+      <input type="text" id="editalAssunto" placeholder="Assunto">
       <button class="btn primary" style="width:100%" onclick="addEdital()">Adicionar assunto</button>
     </div>
     <div id="editalProgress" style="margin-bottom:10px"></div>
@@ -238,7 +232,7 @@ textarea{resize:vertical;min-height:70px}
       </div>
       <div class="pomo-display">
         <div class="pomo-time" id="pomoTime">25:00</div>
-        <div class="pomo-label" id="pomoLabel">Foco</div>
+        <div class="pomo-label" id="pomoLabel">🎯 Foco</div>
         <div class="pomo-btns">
           <button class="btn primary" id="pomoBtn" onclick="togglePomo()">▶ Iniciar</button>
           <button class="btn" onclick="resetPomo()">↺ Resetar</button>
@@ -255,23 +249,11 @@ textarea{resize:vertical;min-height:70px}
   <!-- ESTATÍSTICAS -->
   <div class="page" id="page-stats">
     <div class="grid2">
-      <div class="card">
-        <h2>Acertos por matéria</h2>
-        <div class="chart-wrap"><canvas id="chartAcertos"></canvas></div>
-      </div>
-      <div class="card">
-        <h2>Domínio por matéria</h2>
-        <div class="chart-wrap"><canvas id="chartDominio"></canvas></div>
-      </div>
+      <div class="card"><h2>Acertos por matéria</h2><div class="chart-wrap"><canvas id="chartAcertos"></canvas></div></div>
+      <div class="card"><h2>Domínio geral</h2><div class="chart-wrap"><canvas id="chartDominio"></canvas></div></div>
     </div>
-    <div class="card">
-      <h2>Evolução de acertos (últimas revisões)</h2>
-      <div class="chart-wrap" style="height:180px"><canvas id="chartEvolucao"></canvas></div>
-    </div>
-    <div class="card">
-      <h2>Métodos de estudo utilizados</h2>
-      <div class="chart-wrap" style="height:160px"><canvas id="chartMetodos"></canvas></div>
-    </div>
+    <div class="card"><h2>Evolução de acertos</h2><div class="chart-wrap" style="height:180px"><canvas id="chartEvolucao"></canvas></div></div>
+    <div class="card"><h2>Métodos de estudo</h2><div class="chart-wrap" style="height:160px"><canvas id="chartMetodos"></canvas></div></div>
     <div class="card"><h2>Detalhes por matéria</h2><div id="statsMateria"></div></div>
     <div class="card"><h2>Histórico de estudos</h2><div id="statsHistorico"></div></div>
   </div>
@@ -289,13 +271,13 @@ textarea{resize:vertical;min-height:70px}
       </select>
     </div>
     <div class="row"><label>Recursos usados</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
         <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="resVideo"> 🎥 Videoaula</label>
         <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="resQuestoes"> ❓ Questões</label>
-        <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="resPdf"> 📄 PDF/Livro</label>
+        <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="resPdf"> 📄 PDF</label>
       </div>
     </div>
-    <div class="row"><label>Total de questões</label><input type="number" id="topicoQtdQ" min="0" value="0" style="margin:0"></div>
+    <div class="row"><label>Total de questões</label><input type="number" id="topicoQtdQ" min="0" value="0" style="margin:0" oninput="calcPct()"></div>
     <div class="row"><label>Questões certas</label><input type="number" id="topicoAcertosQ" min="0" value="0" style="margin:0" oninput="calcPct()"></div>
     <div id="pctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
@@ -305,19 +287,19 @@ textarea{resize:vertical;min-height:70px}
   </div>
 </div>
 
-<!-- MODAL: Registrar revisão -->
+<!-- MODAL: Revisar tópico -->
 <div class="modal-overlay" id="modalRevisao">
   <div class="modal">
     <h3>Registrar revisão</h3>
     <div style="font-size:12px;color:var(--text2);margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:var(--radius-sm)" id="revisaoInfo"></div>
     <div class="row"><label>Recursos usados</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
         <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="revResVideo"> 🎥 Videoaula</label>
         <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="revResQuestoes"> ❓ Questões</label>
-        <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="revResPdf"> 📄 PDF/Livro</label>
+        <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="revResPdf"> 📄 PDF</label>
       </div>
     </div>
-    <div class="row"><label>Total de questões</label><input type="number" id="revQtdQ" min="0" value="0" style="margin:0"></div>
+    <div class="row"><label>Total de questões</label><input type="number" id="revQtdQ" min="0" value="0" style="margin:0" oninput="calcRevPct()"></div>
     <div class="row"><label>Questões certas</label><input type="number" id="revAcertosQ" min="0" value="0" style="margin:0" oninput="calcRevPct()"></div>
     <div id="revPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
@@ -328,10 +310,43 @@ textarea{resize:vertical;min-height:70px}
 </div>
 
 <script>
-// ==================== CONFIG ====================
-const SHEET_URL='https://script.google.com/macros/s/AKfycbwTCc2Ee77TiYEwSjs5Li5-ZokjSTFcB867MyZ_2XTHYhsNDON4b4Q4fiuC90zjMdYhDA/exec';
+const EDITAL_PADRAO=[
+  {materia:"Língua Portuguesa",assunto:"Gêneros e Tipos Textuais: características, funcionalidades e sequências (narrativa, descritiva, argumentativa, injuntiva)"},
+  {materia:"Língua Portuguesa",assunto:"Compreensão e Interpretação: identificação de ideias principais, inferências e pressupostos"},
+  {materia:"Língua Portuguesa",assunto:"Coesão (referencial e sequencial), coerência, intertextualidade e informatividade"},
+  {materia:"Língua Portuguesa",assunto:"Sinonímia, antonímia, polissemia, ambiguidade, figuras de linguagem e implícitos"},
+  {materia:"Língua Portuguesa",assunto:"Morfologia: classes de palavras, processos de formação, elementos mórficos e flexão nominal e verbal"},
+  {materia:"Língua Portuguesa",assunto:"Análise morfossintática, termos da oração, subordinação, coordenação, concordância verbal/nominal e regência verbal/nominal"},
+  {materia:"Língua Portuguesa",assunto:"Pontuação, acentuação gráfica, crase e colocação pronominal"},
+  {materia:"Língua Portuguesa",assunto:"Documentos padrão ofício (ata, edital, portaria, relatório) e normas do Manual de Redação da Presidência da República"},
+  {materia:"Noções de Informática",assunto:"Sistemas Operacionais: Windows (uso de interface, arquivos e pastas)"},
+  {materia:"Noções de Informática",assunto:"Suítes de Escritório: Microsoft Office (Word, Excel, PowerPoint)"},
+  {materia:"Noções de Informática",assunto:"Internet e Redes: navegadores (Chrome, Firefox, Edge), busca na Web, Intranet e Extranet"},
+  {materia:"Noções de Informática",assunto:"Segurança da Informação: vírus, malware, phishing, backup e armazenamento em nuvem"},
+  {materia:"Noções de Informática",assunto:"Inteligência Artificial: aspectos legais, éticos, automação e produtividade no setor público"},
+  {materia:"Legislação e Normas",assunto:"Direito Constitucional: princípios fundamentais, Direitos e Garantias Fundamentais e Organização do Estado"},
+  {materia:"Legislação e Normas",assunto:"Regime Jurídico Único — Lei nº 8.112/1990"},
+  {materia:"Legislação e Normas",assunto:"Plano de Carreira dos Cargos TAE — Lei nº 11.091/2005"},
+  {materia:"Legislação e Normas",assunto:"Código de Ética Profissional do Servidor Público Civil — Decreto nº 1.171/1994"},
+  {materia:"Legislação e Normas",assunto:"Lei do Processo Administrativo Federal — Lei nº 9.784/1999"},
+  {materia:"Legislação e Normas",assunto:"Lei de Improbidade Administrativa — Lei nº 8.429/1992"},
+  {materia:"Legislação e Normas",assunto:"Lei de Acesso à Informação — LAI (Lei nº 12.527/2011)"},
+  {materia:"Legislação e Normas",assunto:"Lei Geral de Proteção de Dados Pessoais — LGPD (Lei nº 13.709/2018)"},
+  {materia:"Assistente em Administração",assunto:"Teoria Administrativa: conceitos básicos e funções administrativas (planejamento, organização, direção e controle)"},
+  {materia:"Assistente em Administração",assunto:"Organização, Sistemas e Métodos (OSM): gráficos, departamentalização, tomada de decisão e análise do ambiente externo"},
+  {materia:"Assistente em Administração",assunto:"Gestão de Processos: conceitos, ferramentas, mapeamento, análise e melhoria contínua"},
+  {materia:"Assistente em Administração",assunto:"Gestão Pública: programas, projetos e modernização administrativa"},
+  {materia:"Assistente em Administração",assunto:"Gestão de Pessoas: motivação, liderança, clima e cultura organizacional"},
+  {materia:"Assistente em Administração",assunto:"Gestão de Pessoas no setor público: princípios, funções do setor de pessoal, direitos e deveres dos servidores"},
+  {materia:"Assistente em Administração",assunto:"Comunicação Organizacional: comunicação formal/informal, comunicação não violenta e atendimento"},
+  {materia:"Assistente em Administração",assunto:"Comportamento e Equipes: trabalho em equipe, diversidade e combate ao assédio moral"},
+  {materia:"Assistente em Administração",assunto:"Nova Lei de Licitações e Contratos Administrativos — Lei nº 14.133/2021"},
+  {materia:"Assistente em Administração",assunto:"Noções de orçamento público: ciclo orçamentário, PPA, LDO e LOA"},
+  {materia:"Assistente em Administração",assunto:"Empenho, liquidação, pagamento, restos a pagar e suprimento de fundos"},
+  {materia:"Assistente em Administração",assunto:"Execução, fiscalização e controle de contratos e compras públicas"},
+  {materia:"Assistente em Administração",assunto:"Sustentabilidade e Governança: ODS, ESG e Agenda Ambiental na Administração Pública (A3P)"},
+];
 
-// ==================== FRASES ====================
 const FRASES=[
   {t:"O sucesso é a soma de pequenos esforços repetidos dia após dia.",a:"Robert Collier"},
   {t:"Não importa o quão devagar você vá, desde que não pare.",a:"Confúcio"},
@@ -339,11 +354,9 @@ const FRASES=[
   {t:"Cada página estudada hoje é um passo mais perto da aprovação.",a:""},
   {t:"Sua dedicação de hoje é o seu resultado de amanhã.",a:""},
   {t:"Foco, força e fé. Você vai conseguir!",a:""},
-  {t:"O conhecimento é a única riqueza que ninguém pode te tirar.",a:""},
   {t:"Estude como se sua aprovação dependesse disso — porque depende.",a:""},
   {t:"Pequenos progressos diários levam a grandes resultados.",a:""},
   {t:"A aprovação não é sorte, é consequência de muito estudo.",a:""},
-  {t:"Acredite no seu potencial e vá além dos seus limites.",a:""},
   {t:"Um dia de estudo a mais pode ser a diferença entre aprovado e reprovado.",a:""},
 ];
 let fraseIdx=Math.floor(Math.random()*FRASES.length);
@@ -354,35 +367,17 @@ function renderFrase(){
   document.getElementById('fraseAutor').textContent=f.a?'— '+f.a:'';
 }
 
-// ==================== SYNC ====================
-let saveTimer=null;
-function setSyncStatus(s,m){document.getElementById('syncDot').className='sync-dot'+(s?' '+s:'');document.getElementById('syncMsg').textContent=m;}
-async function syncLoad(){
-  setSyncStatus('saving','Carregando da nuvem...');
-  try{
-    const r=await fetch(SHEET_URL+'?t='+Date.now());
-    const j=await r.json();
-    if(j.data){const d=JSON.parse(j.data);data=Object.assign(emptyData(),d);}
-    setSyncStatus('ok','Sincronizado ☁️');renderAll();
-  }catch(e){setSyncStatus('err','Offline — dados locais');loadLocal();renderAll();}
-}
-async function syncSave(){
-  setSyncStatus('saving','Salvando...');saveLocal();
-  try{
-    await fetch(SHEET_URL,{method:'POST',body:JSON.stringify(data),headers:{'Content-Type':'text/plain'}});
-    setSyncStatus('ok','Salvo às '+new Date().toLocaleTimeString('pt-BR')+' ☁️');
-  }catch(e){setSyncStatus('err','Sem internet — salvo localmente');}
-}
-function scheduleSave(){clearTimeout(saveTimer);setSyncStatus('saving','Aguardando...');saveTimer=setTimeout(syncSave,2000);}
-function saveLocal(){localStorage.setItem('cp_bk',JSON.stringify(data));}
-function loadLocal(){try{const d=JSON.parse(localStorage.getItem('cp_bk'));if(d)data=Object.assign(emptyData(),d);}catch(e){}}
 function emptyData(){return{materias:[],metas:[],edital:[],streak:{count:0,lastDate:''},sessions:{},pomMinutes:{}};}
-
-// ==================== DATA ====================
 let data=emptyData();
-function save(){saveLocal();scheduleSave();}
+function save(){localStorage.setItem('cp_data',JSON.stringify(data));}
+function loadData(){
+  try{
+    const d=JSON.parse(localStorage.getItem('cp_data'));
+    if(d){data=Object.assign(emptyData(),d);}
+    else{data.edital=EDITAL_PADRAO.map(e=>({...e,done:false,subAssuntos:[]}));save();}
+  }catch(e){data.edital=EDITAL_PADRAO.map(e=>({...e,done:false,subAssuntos:[]}));save();}
+}
 
-// ==================== UTILS ====================
 function todayStr(){return new Date().toISOString().slice(0,10)}
 function fmtDate(s){if(!s)return'';return new Date(s+'T00:00:00').toLocaleDateString('pt-BR')}
 function daysDiff(s){return Math.round((new Date(s+'T00:00:00')-new Date(todayStr()+'T00:00:00'))/(1000*86400))}
@@ -390,19 +385,18 @@ function nextRevDate(ac){const t=new Date();t.setDate(t.getDate()+(ac>=90?7:ac>=
 function calcPct(){
   const q=parseInt(document.getElementById('topicoQtdQ').value)||0;
   const a=parseInt(document.getElementById('topicoAcertosQ').value)||0;
-  const pct=q>0?Math.round(a/q*100):0;
-  document.getElementById('pctPreview').textContent='Porcentagem: '+(q>0?pct+'%':'—');
-  return pct;
+  document.getElementById('pctPreview').textContent='Porcentagem: '+(q>0?Math.round(a/q*100)+'%':'—');
 }
 function calcRevPct(){
   const q=parseInt(document.getElementById('revQtdQ').value)||0;
   const a=parseInt(document.getElementById('revAcertosQ').value)||0;
-  const pct=q>0?Math.round(a/q*100):0;
-  document.getElementById('revPctPreview').textContent='Porcentagem: '+(q>0?pct+'%':'—');
-  return pct;
+  document.getElementById('revPctPreview').textContent='Porcentagem: '+(q>0?Math.round(a/q*100)+'%':'—');
 }
-
-// ==================== DOMÍNIO ====================
+function updateStreak(){
+  const today=todayStr(),st=data.streak;if(st.lastDate===today)return;
+  const y=new Date();y.setDate(y.getDate()-1);
+  st.count=st.lastDate===y.toISOString().slice(0,10)?st.count+1:1;st.lastDate=today;
+}
 function calcDominio(t){
   const rev=t.revisoes||1,ac=t.acertos||0;
   const score=Math.round(ac*0.7+Math.min(rev/5,1)*100*0.3);
@@ -431,25 +425,41 @@ function revBadge(ds){
   return`<span class="badge ok">Em ${d}d</span>`;
 }
 function recursosTags(t){
-  const tags=[];
-  if(t.video)tags.push('🎥');if(t.questoes)tags.push('❓');if(t.pdf)tags.push('📄');
-  return tags.length?`<span style="font-size:12px">${tags.join(' ')}</span>`:'';
+  const r=[];if(t.video)r.push('🎥');if(t.questoes)r.push('❓');if(t.pdf)r.push('📄');
+  return r.length?`<span style="font-size:12px">${r.join(' ')}</span>`:'';
 }
 function metodoBadge(m){
   return m==='nova'?`<span class="metodo-tag metodo-nova">📘 Nova</span>`:`<span class="metodo-tag metodo-rev">🔄 Revisão</span>`;
 }
-function updateStreak(){
-  const today=todayStr(),st=data.streak;if(st.lastDate===today)return;
-  const y=new Date();y.setDate(y.getDate()-1);
-  st.count=st.lastDate===y.toISOString().slice(0,10)?st.count+1:1;st.lastDate=today;
-}
 
-// ==================== PAGES ====================
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   if(btn)btn.classList.add('active');render();
+}
+
+// ==================== EDIÇÃO INLINE ====================
+function startEdit(el,onSave){
+  const oldVal=el.textContent;
+  const inp=document.createElement('input');
+  inp.className='inline-edit-input';
+  inp.value=oldVal;
+  el.replaceWith(inp);
+  inp.focus();
+  inp.select();
+  function finish(){
+    const newVal=inp.value.trim()||oldVal;
+    const span=document.createElement('span');
+    span.className=el.className;
+    span.textContent=newVal;
+    inp.replaceWith(span);
+    onSave(newVal);
+    // re-attach click
+    span.onclick=el.onclick;
+  }
+  inp.onblur=finish;
+  inp.onkeydown=e=>{if(e.key==='Enter')inp.blur();if(e.key==='Escape'){inp.value=oldVal;inp.blur();}};
 }
 
 // ==================== MATÉRIAS ====================
@@ -459,15 +469,15 @@ function addMateria(){
   data.materias.push({nome:v,topicos:[]});document.getElementById('novaMateria').value='';save();renderMaterias();
 }
 function deleteMateria(i){if(!confirm('Remover matéria?'))return;data.materias.splice(i,1);save();renderMaterias();}
+function editMateriaNome(mi){
+  const el=document.getElementById(`mat_nome_${mi}`);
+  startEdit(el,newVal=>{data.materias[mi].nome=newVal;save();});
+}
 function openAddTopico(mi){
   curMat=mi;
-  document.getElementById('topicoNome').value='';
+  ['topicoNome','topicoQtdQ','topicoAcertosQ'].forEach(id=>document.getElementById(id).value=id==='topicoNome'?'':'0');
   document.getElementById('topicoMetodo').value='nova';
-  document.getElementById('topicoQtdQ').value=0;
-  document.getElementById('topicoAcertosQ').value=0;
-  document.getElementById('resVideo').checked=false;
-  document.getElementById('resQuestoes').checked=false;
-  document.getElementById('resPdf').checked=false;
+  ['resVideo','resQuestoes','resPdf'].forEach(id=>document.getElementById(id).checked=false);
   document.getElementById('pctPreview').textContent='Porcentagem: —';
   document.getElementById('modalTopico').classList.add('open');
 }
@@ -483,10 +493,37 @@ function saveTopico(){
     questoes:document.getElementById('resQuestoes').checked,
     pdf:document.getElementById('resPdf').checked,
     dataEstudo:todayStr(),proximaRevisao:nextRevDate(acertos),revisoes:1,
+    subAssuntos:[],
     historico:[{data:todayStr(),acertos,metodo}]
   });
   updateStreak();save();closeModal();renderMaterias();
 }
+function editTopicoNome(mi,ti){
+  const el=document.getElementById(`top_nome_${mi}_${ti}`);
+  startEdit(el,newVal=>{data.materias[mi].topicos[ti].nome=newVal;save();});
+}
+function deleteTopico(mi,ti){data.materias[mi].topicos.splice(ti,1);save();renderMaterias();}
+
+// SUB-ASSUNTOS
+function addSubAssunto(mi,ti){
+  const inp=document.getElementById(`sub_inp_${mi}_${ti}`);
+  const v=inp.value.trim();if(!v)return;
+  if(!data.materias[mi].topicos[ti].subAssuntos)data.materias[mi].topicos[ti].subAssuntos=[];
+  data.materias[mi].topicos[ti].subAssuntos.push({texto:v,done:false});
+  inp.value='';save();renderMaterias();
+}
+function toggleSubAssunto(mi,ti,si){
+  data.materias[mi].topicos[ti].subAssuntos[si].done=!data.materias[mi].topicos[ti].subAssuntos[si].done;
+  save();renderMaterias();
+}
+function deleteSubAssunto(mi,ti,si){
+  data.materias[mi].topicos[ti].subAssuntos.splice(si,1);save();renderMaterias();
+}
+function editSubAssunto(mi,ti,si){
+  const el=document.getElementById(`sub_txt_${mi}_${ti}_${si}`);
+  startEdit(el,newVal=>{data.materias[mi].topicos[ti].subAssuntos[si].texto=newVal;save();});
+}
+
 function renderMaterias(){
   const el=document.getElementById('listaMaterias');
   if(!data.materias.length){el.innerHTML='<div class="empty">Nenhuma matéria ainda.</div>';return;}
@@ -494,7 +531,8 @@ function renderMaterias(){
     const dm=dominioMateria(m);
     return`<div class="card">
       <div class="flex" style="flex-wrap:wrap;gap:5px">
-        <h2 style="margin:0">${m.nome}</h2><div class="spacer"></div>
+        <h2 style="margin:0"><span id="mat_nome_${mi}" class="editavel" onclick="editMateriaNome(${mi})">${m.nome}</span></h2>
+        <div class="spacer"></div>
         ${dm?`<span class="dominio-badge ${dm.cls}">${dm.emoji} ${dm.nivel}</span>`:''}
         <span class="tag">${m.topicos.length} tópico${m.topicos.length!==1?'s':''}</span>
         <button class="btn sm primary" onclick="openAddTopico(${mi})">+ Tópico</button>
@@ -502,37 +540,49 @@ function renderMaterias(){
       </div>
       ${m.topicos.length?`<div class="divider"></div>`+m.topicos.map((t,ti)=>{
         const dom=calcDominio(t);const bc=dom.nivel==='Forte'?'#639922':dom.nivel==='Médio'?'#EF9F27':'#E24B4A';
-        return`<div class="item"><div class="flex">${dominioRing(t)}<div style="flex:1;min-width:0">
-          <div class="flex" style="flex-wrap:wrap;gap:4px">
-            <span class="item-title">${t.nome}</span>
-            ${metodoBadge(t.metodo||'nova')} ${recursosTags(t)}
-            <div class="spacer"></div>
-            ${dominioBadge(t)}
-            <button class="btn sm" onclick="openRevModal(${mi},${ti})">Revisar</button>
-            <button class="btn sm danger" onclick="deleteTopico(${mi},${ti})">✕</button>
+        const subs=t.subAssuntos||[];
+        const subsDone=subs.filter(s=>s.done).length;
+        return`<div class="item">
+          <div class="flex">${dominioRing(t)}<div style="flex:1;min-width:0">
+            <div class="flex" style="flex-wrap:wrap;gap:4px">
+              <span id="top_nome_${mi}_${ti}" class="editavel item-title" onclick="editTopicoNome(${mi},${ti})">${t.nome}</span>
+              ${metodoBadge(t.metodo||'nova')} ${recursosTags(t)}
+              <div class="spacer"></div>
+              ${dominioBadge(t)}
+              <button class="btn sm" onclick="openRevModal(${mi},${ti})">Revisar</button>
+              <button class="btn sm danger" onclick="deleteTopico(${mi},${ti})">✕</button>
+            </div>
+            <div class="item-sub">Acertos: ${t.acertos}% · ${t.qtdQ||0} questões · ${t.revisoes||1} rev. · Próx: ${fmtDate(t.proximaRevisao)} ${revBadge(t.proximaRevisao)}</div>
+            <div class="acerto-bar"><div class="acerto-fill" style="width:${t.acertos}%;background:${bc}"></div></div>
+          </div></div>
+          <div class="sub-assuntos">
+            ${subs.map((s,si)=>`
+              <div class="sub-assunto-item">
+                <div class="checkbox ${s.done?'done':''}" style="width:15px;height:15px;font-size:9px" onclick="toggleSubAssunto(${mi},${ti},${si})">${s.done?'✓':''}</div>
+                <span id="sub_txt_${mi}_${ti}_${si}" class="sub-assunto-text editavel" style="${s.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSubAssunto(${mi},${ti},${si})">${s.texto}</span>
+                <button class="btn sm" onclick="deleteSubAssunto(${mi},${ti},${si})" style="color:var(--text2);padding:2px 6px">✕</button>
+              </div>`).join('')}
+            <div class="sub-assunto-add">
+              <input type="text" id="sub_inp_${mi}_${ti}" placeholder="+ Adicionar sub-assunto..." onkeydown="if(event.key==='Enter')addSubAssunto(${mi},${ti})">
+              <button class="btn sm primary" onclick="addSubAssunto(${mi},${ti})">+</button>
+            </div>
+            ${subs.length?`<div style="font-size:10px;color:var(--text2);margin-top:3px">${subsDone}/${subs.length} concluídos</div>`:''}
           </div>
-          <div class="item-sub">Acertos: ${t.acertos}% · ${t.qtdQ||0} questões (${t.acertosQ||0} certas) · ${t.revisoes||1} rev. · Próx: ${fmtDate(t.proximaRevisao)} ${revBadge(t.proximaRevisao)}</div>
-          <div class="acerto-bar"><div class="acerto-fill" style="width:${t.acertos}%;background:${bc}"></div></div>
-        </div></div></div>`;
+        </div>`;
       }).join(''):'<div style="padding:6px 0;font-size:12px;color:var(--text3)">Nenhum tópico ainda</div>'}
     </div>`;
   }).join('');
 }
-function deleteTopico(mi,ti){data.materias[mi].topicos.splice(ti,1);save();renderMaterias();}
 
-// ==================== REVISÕES ====================
+// REVISÕES
 let revTab='hoje';
 function setRevTab(t,btn){revTab=t;document.querySelectorAll('.tab-sub button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderRevisoes();}
 let curRevMat=null,curRevTop=null;
 function openRevModal(mi,ti){
   curRevMat=mi;curRevTop=ti;
-  const t=data.materias[mi].topicos[ti];
-  document.getElementById('revisaoInfo').textContent=t.nome+' — '+data.materias[mi].nome;
-  document.getElementById('revQtdQ').value=0;
-  document.getElementById('revAcertosQ').value=0;
-  document.getElementById('revResVideo').checked=false;
-  document.getElementById('revResQuestoes').checked=false;
-  document.getElementById('revResPdf').checked=false;
+  document.getElementById('revisaoInfo').textContent=data.materias[mi].topicos[ti].nome+' — '+data.materias[mi].nome;
+  ['revQtdQ','revAcertosQ'].forEach(id=>document.getElementById(id).value=0);
+  ['revResVideo','revResQuestoes','revResPdf'].forEach(id=>document.getElementById(id).checked=false);
   document.getElementById('revPctPreview').textContent='Porcentagem: —';
   document.getElementById('modalRevisao').classList.add('open');
 }
@@ -558,42 +608,36 @@ function renderRevisoes(){
   data.materias.forEach((m,mi)=>m.topicos.forEach((t,ti)=>items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao)})));
   let f=revTab==='hoje'?items.filter(x=>x.diff<=0):revTab==='proximas'?items.filter(x=>x.diff>0).sort((a,b)=>a.diff-b.diff):items.sort((a,b)=>a.diff-b.diff);
   if(!f.length){el.innerHTML=`<div class="empty">Nenhuma revisão ${revTab==='hoje'?'para hoje 🎉':'encontrada'}!</div>`;return;}
-  el.innerHTML=f.map(x=>`<div class="card" style="margin-bottom:8px"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${dominioBadge(x.t)} ${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} · ${x.t.revisoes||1} rev. · ${x.t.acertos}% · ${x.t.qtdQ||0} questões</div></div></div></div>`).join('');
+  el.innerHTML=f.map(x=>`<div class="card" style="margin-bottom:8px"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${dominioBadge(x.t)} ${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} · ${x.t.revisoes||1} rev. · ${x.t.acertos}%</div></div></div></div>`).join('');
 }
 
-// ==================== EDITAL ====================
+// EDITAL
 function addEdital(){
   const mat=document.getElementById('editalMateria').value.trim();
   const ass=document.getElementById('editalAssunto').value.trim();
   if(!mat||!ass)return;
-  if(!data.edital)data.edital=[];
-  data.edital.push({materia:mat,assunto:ass,done:false});
-  document.getElementById('editalAssunto').value='';
-  save();renderEdital();
+  data.edital.push({materia:mat,assunto:ass,done:false,subAssuntos:[]});
+  document.getElementById('editalAssunto').value='';save();renderEdital();
 }
-function toggleEdital(i){
-  data.edital[i].done=!data.edital[i].done;save();renderEdital();
-}
+function toggleEdital(i){data.edital[i].done=!data.edital[i].done;save();renderEdital();}
 function deleteEdital(i){data.edital.splice(i,1);save();renderEdital();}
 function renderEdital(){
-  if(!data.edital)data.edital=[];
   const el=document.getElementById('listaEdital');
   const prog=document.getElementById('editalProgress');
-  if(!data.edital.length){el.innerHTML='<div class="empty">Nenhum assunto no edital ainda.</div>';prog.innerHTML='';return;}
+  if(!data.edital.length){el.innerHTML='<div class="empty">Nenhum assunto no edital.</div>';prog.innerHTML='';return;}
   const total=data.edital.length,done=data.edital.filter(e=>e.done).length,pct=Math.round(done/total*100);
   prog.innerHTML=`<div class="card"><div class="flex" style="margin-bottom:6px"><span style="font-size:13px;font-weight:600">Progresso do edital</span><div class="spacer"></div><span style="font-size:14px;font-weight:700;color:${pct===100?'var(--green)':'var(--text)'}">${done}/${total} — ${pct}%</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div></div>`;
-  // agrupa por matéria
   const grupos={};
   data.edital.forEach((e,i)=>{if(!grupos[e.materia])grupos[e.materia]=[];grupos[e.materia].push({...e,i});});
   el.innerHTML=Object.entries(grupos).map(([mat,items])=>{
-    const doneG=items.filter(e=>e.done).length;
-    return`<div class="card edital-mat">
-      <div class="flex" style="margin-bottom:8px">
+    const doneG=items.filter(e=>e.done).length,pctG=Math.round(doneG/items.length*100);
+    return`<div class="card">
+      <div class="flex" style="margin-bottom:6px">
         <span style="font-size:14px;font-weight:600">${mat}</span>
         <div class="spacer"></div>
-        <span class="tag">${doneG}/${items.length}</span>
+        <span class="tag">${doneG}/${items.length} — ${pctG}%</span>
       </div>
-      <div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${Math.round(doneG/items.length*100)}%"></div></div>
+      <div class="progress-bar" style="margin-bottom:10px"><div class="progress-fill" style="width:${pctG}%"></div></div>
       ${items.map(e=>`<div class="edital-item ${e.done?'done':''}">
         <div class="checkbox ${e.done?'done':''}" onclick="toggleEdital(${e.i})">${e.done?'✓':''}</div>
         <span class="edital-item-text">${e.assunto}</span>
@@ -603,7 +647,7 @@ function renderEdital(){
   }).join('');
 }
 
-// ==================== METAS ====================
+// METAS
 function addMeta(){
   const v=document.getElementById('novaMeta').value.trim();if(!v)return;
   data.metas.push({texto:v,done:false,data:todayStr()});document.getElementById('novaMeta').value='';save();renderMetas();
@@ -619,7 +663,7 @@ function renderMetas(){
   today.map(m=>{const gi=data.metas.indexOf(m);return`<div class="card" style="margin-bottom:6px"><div class="flex"><div class="checkbox ${m.done?'done':''}" onclick="toggleMeta(${gi})">${m.done?'✓':''}</div><span style="font-size:13px;${m.done?'text-decoration:line-through;color:var(--text2)':''}">${m.texto}</span><div class="spacer"></div><button class="btn sm" onclick="deleteMeta(${gi})" style="color:var(--text2)">✕</button></div></div>`;}).join('');
 }
 
-// ==================== DASHBOARD ====================
+// DASHBOARD
 let weekChartInst=null;
 function renderDash(){
   renderFrase();
@@ -628,12 +672,12 @@ function renderDash(){
   const metasHoje=data.metas.filter(m=>m.data===today);
   const metasDone=metasHoje.filter(m=>m.done).length;
   const pomMin=data.pomMinutes[today]||0;
-  const totalTopicos=data.materias.reduce((a,m)=>a+m.topicos.length,0);
+  const editalDone=data.edital.filter(e=>e.done).length;
   document.getElementById('dashMetrics').innerHTML=`
     <div class="metric"><span class="val">${revHoje.length}</span><span class="lbl">Revisões hoje</span></div>
     <div class="metric"><span class="val">${metasDone}/${metasHoje.length||0}</span><span class="lbl">Metas do dia</span></div>
     <div class="metric"><span class="val">${pomMin}</span><span class="lbl">Min. estudados</span></div>
-    <div class="metric"><span class="val">${totalTopicos}</span><span class="lbl">Tópicos totais</span></div>`;
+    <div class="metric"><span class="val">${editalDone}/${data.edital.length}</span><span class="lbl">Edital</span></div>`;
   const dr=document.getElementById('dashRevisoes');
   if(!revHoje.length){dr.innerHTML='<div class="empty" style="padding:1rem 0">✅ Sem revisões hoje!</div>';}
   else dr.innerHTML=revHoje.slice(0,4).map(x=>`<div class="item"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome} ${dominioBadge(x.t)}</div></div></div></div>`).join('')+(revHoje.length>4?`<div style="text-align:center;padding:6px;font-size:11px;color:var(--text2)">+${revHoje.length-4} mais</div>`:'');
@@ -644,73 +688,64 @@ function renderDash(){
     dm.innerHTML=`<div class="flex" style="margin-bottom:5px"><span style="font-size:12px;color:var(--text2)">${metasDone}/${metasHoje.length}</span><div class="spacer"></div><span style="font-size:13px;font-weight:700">${pct}%</span></div><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>`+
     metasHoje.map(m=>`<div class="item"><div class="flex"><div class="checkbox ${m.done?'done':''}" onclick="toggleMeta(${data.metas.indexOf(m)})">${m.done?'✓':''}</div><span style="font-size:12px;${m.done?'text-decoration:line-through;color:var(--text2)':''}">${m.texto}</span></div></div>`).join('');
   }
-  // week chart
   const days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(d.toISOString().slice(0,10));}
   const vals=days.map(d=>data.pomMinutes[d]||0);
   const nomes=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],dw=new Date().getDay();
-  const labels=days.map((_,i)=>nomes[(dw-6+i+7)%7]);
-  const bgColors=days.map(d=>d===todayStr()?'#1D9E75':'#d0d0cc');
   if(weekChartInst)weekChartInst.destroy();
   weekChartInst=new Chart(document.getElementById('weekChart'),{
-    type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:bgColors,borderRadius:4,borderSkipped:false}]},
+    type:'bar',data:{labels:days.map((_,i)=>nomes[(dw-6+i+7)%7]),datasets:[{data:vals,backgroundColor:days.map(d=>d===todayStr()?'#1D9E75':'#d0d0cc'),borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{size:10}}}}}
   });
   document.getElementById('streakLabel').textContent='🔥 '+data.streak.count+' dia'+(data.streak.count!==1?'s':'')+' de streak';
 }
 
-// ==================== ESTATÍSTICAS ====================
+// STATS
 let charts={};
-function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
 function renderStats(){
   const el=document.getElementById('statsMateria');
-  if(!data.materias.length){el.innerHTML='<div class="empty">Sem dados ainda</div>';['chartAcertos','chartDominio','chartEvolucao','chartMetodos'].forEach(id=>{destroyChart(id);});return;}
-
-  // Acertos por matéria (barra)
-  destroyChart('chartAcertos');
-  const mNomes=data.materias.filter(m=>m.topicos.length).map(m=>m.nome.length>12?m.nome.slice(0,12)+'…':m.nome);
-  const mAcertos=data.materias.filter(m=>m.topicos.length).map(m=>Math.round(m.topicos.reduce((a,t)=>a+t.acertos,0)/m.topicos.length));
+  const mComDados=data.materias.filter(m=>m.topicos.length);
+  if(!mComDados.length){el.innerHTML='<div class="empty">Sem dados ainda</div>';['chartAcertos','chartDominio','chartEvolucao','chartMetodos'].forEach(dc);return;}
+  dc('chartAcertos');
   charts['chartAcertos']=new Chart(document.getElementById('chartAcertos'),{
-    type:'bar',data:{labels:mNomes,datasets:[{label:'% acertos',data:mAcertos,backgroundColor:mAcertos.map(v=>v>=80?'#1D9E75':v>=60?'#EF9F27':'#E24B4A'),borderRadius:5}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}
+    type:'bar',
+    data:{labels:mComDados.map(m=>m.nome.length>14?m.nome.slice(0,14)+'…':m.nome),
+      datasets:[{data:mComDados.map(m=>Math.round(m.topicos.reduce((a,t)=>a+t.acertos,0)/m.topicos.length)),
+        backgroundColor:mComDados.map(m=>{const avg=Math.round(m.topicos.reduce((a,t)=>a+t.acertos,0)/m.topicos.length);return avg>=80?'#1D9E75':avg>=60?'#EF9F27':'#E24B4A';}),borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}
   });
-
-  // Domínio por matéria (rosca)
-  destroyChart('chartDominio');
-  const grupos={Forte:0,Médio:0,Fraco:0};
-  data.materias.forEach(m=>m.topicos.forEach(t=>{grupos[calcDominio(t).nivel]++;}));
+  dc('chartDominio');
+  const g={Forte:0,Médio:0,Fraco:0};
+  data.materias.forEach(m=>m.topicos.forEach(t=>{g[calcDominio(t).nivel]++;}));
   charts['chartDominio']=new Chart(document.getElementById('chartDominio'),{
-    type:'doughnut',data:{labels:['🟢 Forte','🟡 Médio','🔴 Fraco'],datasets:[{data:[grupos.Forte,grupos['Médio'],grupos.Fraco],backgroundColor:['#1D9E75','#EF9F27','#E24B4A'],borderWidth:2}]},
+    type:'doughnut',
+    data:{labels:['🟢 Forte','🟡 Médio','🔴 Fraco'],datasets:[{data:[g.Forte,g['Médio'],g.Fraco],backgroundColor:['#1D9E75','#EF9F27','#E24B4A'],borderWidth:2}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}}}
   });
-
-  // Evolução ao longo do tempo (linha)
-  destroyChart('chartEvolucao');
-  const histPoints=[];
-  data.materias.forEach(m=>m.topicos.forEach(t=>{if(t.historico)t.historico.forEach(h=>histPoints.push({data:h.data,acertos:h.acertos,nome:t.nome}));}));
-  histPoints.sort((a,b)=>a.data.localeCompare(b.data));
-  const evolLabels=histPoints.slice(-20).map(h=>fmtDate(h.data));
-  const evolData=histPoints.slice(-20).map(h=>h.acertos);
+  dc('chartEvolucao');
+  const pts=[];
+  data.materias.forEach(m=>m.topicos.forEach(t=>{if(t.historico)t.historico.forEach(h=>pts.push({data:h.data,acertos:h.acertos}));}));
+  pts.sort((a,b)=>a.data.localeCompare(b.data));
+  const pts20=pts.slice(-20);
   charts['chartEvolucao']=new Chart(document.getElementById('chartEvolucao'),{
-    type:'line',data:{labels:evolLabels,datasets:[{label:'Acertos (%)',data:evolData,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.1)',tension:.3,fill:true,pointRadius:3}]},
+    type:'line',
+    data:{labels:pts20.map(h=>fmtDate(h.data)),datasets:[{data:pts20.map(h=>h.acertos),borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.1)',tension:.3,fill:true,pointRadius:3}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}},x:{ticks:{maxRotation:45,font:{size:9}},grid:{display:false}}}}
   });
-
-  // Métodos de estudo
-  destroyChart('chartMetodos');
-  let video=0,questoes=0,pdf=0;
-  data.materias.forEach(m=>m.topicos.forEach(t=>{if(t.video)video++;if(t.questoes)questoes++;if(t.pdf)pdf++;}));
+  dc('chartMetodos');
+  let vid=0,que=0,pdf=0;
+  data.materias.forEach(m=>m.topicos.forEach(t=>{if(t.video)vid++;if(t.questoes)que++;if(t.pdf)pdf++;}));
   charts['chartMetodos']=new Chart(document.getElementById('chartMetodos'),{
-    type:'bar',data:{labels:['🎥 Videoaula','❓ Questões','📄 PDF/Livro'],datasets:[{data:[video,questoes,pdf],backgroundColor:['#185FA5','#854F0B','#3B6D11'],borderRadius:5}]},
-    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{precision:0}},y:{grid:{display:false}}}}
+    type:'bar',
+    data:{labels:['🎥 Videoaula','❓ Questões','📄 PDF/Livro'],datasets:[{data:[vid,que,pdf],backgroundColor:['#185FA5','#854F0B','#3B6D11'],borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{precision:0}},y:{grid:{display:false}}}}
   });
-
-  // Detalhes
-  const grupos2={Forte:[],Médio:[],Fraco:[]};
-  data.materias.forEach(m=>m.topicos.forEach(t=>{const d=calcDominio(t);grupos2[d.nivel].push({m,t,d});}));
+  const g2={Forte:0,Médio:0,Fraco:0};
+  data.materias.forEach(m=>m.topicos.forEach(t=>{g2[calcDominio(t).nivel]++;}));
   el.innerHTML=`<div class="grid3" style="margin-bottom:12px">
-    <div class="metric"><span class="val" style="color:var(--green-txt)">${grupos2['Forte'].length}</span><span class="lbl">🟢 Forte</span></div>
-    <div class="metric"><span class="val" style="color:var(--amber-txt)">${grupos2['Médio'].length}</span><span class="lbl">🟡 Médio</span></div>
-    <div class="metric"><span class="val" style="color:var(--red-txt)">${grupos2['Fraco'].length}</span><span class="lbl">🔴 Fraco</span></div>
+    <div class="metric"><span class="val" style="color:var(--green-txt)">${g2['Forte']}</span><span class="lbl">🟢 Forte</span></div>
+    <div class="metric"><span class="val" style="color:var(--amber-txt)">${g2['Médio']}</span><span class="lbl">🟡 Médio</span></div>
+    <div class="metric"><span class="val" style="color:var(--red-txt)">${g2['Fraco']}</span><span class="lbl">🔴 Fraco</span></div>
   </div>`+data.materias.map(m=>{
     if(!m.topicos.length)return`<div class="item"><span class="item-title">${m.nome}</span> <span style="font-size:11px;color:var(--text2)">— sem tópicos</span></div>`;
     const dm=dominioMateria(m);
@@ -718,8 +753,8 @@ function renderStats(){
     const totalQ=m.topicos.reduce((a,t)=>a+(t.qtdQ||0),0);
     const totalC=m.topicos.reduce((a,t)=>a+(t.acertosQ||0),0);
     return`<div class="item"><div class="flex" style="flex-wrap:wrap;gap:4px;margin-bottom:6px"><span class="item-title">${m.nome}</span><div class="spacer"></div><span class="dominio-badge ${dm.cls}">${dm.emoji} ${dm.nivel}</span></div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:5px;margin-bottom:5px">
-        ${m.topicos.map(t=>{const d=calcDominio(t);return`<div style="display:flex;align-items:center;gap:5px;background:var(--bg);border-radius:var(--radius-sm);padding:6px 9px;"><span>${d.emoji}</span><div style="min-width:0;flex:1"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nome}</div><div style="font-size:10px;color:var(--text2)">${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1}rev</div></div></div>`;}).join('')}
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:5px;margin-bottom:5px">
+        ${m.topicos.map(t=>{const d=calcDominio(t);const subs=t.subAssuntos||[];return`<div style="display:flex;align-items:flex-start;gap:5px;background:var(--bg);border-radius:var(--radius-sm);padding:6px 9px;"><span style="margin-top:1px">${d.emoji}</span><div style="min-width:0;flex:1"><div style="font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.nome}</div><div style="font-size:10px;color:var(--text2)">${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1}rev${subs.length?' · '+subs.filter(s=>s.done).length+'/'+subs.length+' sub':''}</div></div></div>`;}).join('')}
       </div>
       <div style="font-size:11px;color:var(--text2)">Média: ${avgAc}% · ${totalQ} questões (${totalC} certas · ${totalQ>0?Math.round(totalC/totalQ*100):0}%)</div>
     </div>`;
@@ -730,7 +765,7 @@ function renderStats(){
   hEl.innerHTML=keys.map(d=>{const s=data.sessions[d],pm=data.pomMinutes[d]||0;return`<div class="item"><div class="flex"><span class="item-title">${fmtDate(d)}</span><div class="spacer"></div><span class="tag">${pm} min</span><span class="tag" style="margin-left:4px">${s.revisoes||0} revisões</span></div></div>`;}).join('');
 }
 
-// ==================== POMODORO ====================
+// POMODORO
 let pomoInterval=null,pomoRunning=false,pomoSeconds=0,pomoMode='focus',pomoSessHoje=0;
 function getFoco(){return(parseInt(document.getElementById('pomoFocoSet').value)||25)*60}
 function getBreak(){return(parseInt(document.getElementById('pomoBreakSet').value)||5)*60}
@@ -763,11 +798,9 @@ function resetPomo(){
   document.getElementById('pomoBtn').textContent='▶ Iniciar';
 }
 
-// ==================== MODAL ====================
 function closeModal(){document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
 document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal();}));
 
-// ==================== RENDER ====================
 function render(){
   const id=document.querySelector('.page.active').id.replace('page-','');
   if(id==='dashboard')renderDash();
@@ -777,14 +810,13 @@ function render(){
   else if(id==='metas')renderMetas();
   else if(id==='stats')renderStats();
 }
-function renderAll(){renderDash();renderMaterias();renderRevisoes();renderEdital();renderMetas();renderStats();}
+function renderAll(){renderDash();renderMaterias();renderRevisoes();renderEdital();renderMetas();}
 
-// ==================== INIT ====================
 const dn=['domingo','segunda','terça','quarta','quinta','sexta','sábado'],nd=new Date();
 document.getElementById('dateLabel').textContent=dn[nd.getDay()]+', '+nd.toLocaleDateString('pt-BR');
+loadData();resetPomo();
 document.getElementById('pomoMinutes').textContent=data.pomMinutes[todayStr()]||0;
-resetPomo();
-syncLoad();
+renderAll();
 </script>
 </body>
 </html>
