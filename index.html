@@ -26,7 +26,7 @@
   --blue-bg:#0a1e2e;--blue-txt:#85B7EB;
   --today-bg:#0a2e1f;--today-txt:#5DCAA5;
 }}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 .app{max-width:940px;margin:0 auto;padding:14px}
 .header{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
 .header-title{font-size:20px;font-weight:700}
@@ -139,22 +139,38 @@ input:focus,select:focus{border-color:var(--green)}
 .edit-hint{font-size:10px;color:var(--text3);margin-bottom:8px;padding:0 4px}
 .cfg-btn{padding:7px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font-size:13px;cursor:pointer;transition:.15s;font-weight:500}
 .cfg-btn:hover{background:var(--bg)}
-.cfg-btn.active{border-width:2px;font-weight:700}
-.cor-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:.15s;flex-shrink:0}
-.cor-dot.active{border-color:var(--text);transform:scale(1.15)}
-body[data-theme="dark"]{background:#1a1a1a!important;color:#f0f0f0!important}
-body[data-theme="dark"] .app,body[data-theme="dark"] .card,body[data-theme="dark"] .nav,body[data-theme="dark"] .modal,body[data-theme="dark"] .frase-card{background:#242424!important;border-color:#333!important}
-body[data-theme="dark"] input,body[data-theme="dark"] select{background:#242424!important;color:#f0f0f0!important;border-color:#444!important}
-body[data-theme="dark"] .metric,body[data-theme="dark"] .tag,body[data-theme="dark"] .sub-assuntos,body[data-theme="dark"] .acerto-bar,body[data-theme="dark"] .progress-bar{background:#1a1a1a!important}
-body[data-theme="dark"] .nav button{color:#aaa!important}
-body[data-theme="dark"] .nav button.active{color:#f0f0f0!important;background:#1a1a1a!important}
-body[data-theme="dark"] .item-sub,.item-sub{color:var(--text2)}
-body[data-theme="light"]{background:#f5f5f3!important;color:#1a1a1a!important}
+.cfg-btn.active{border-color:var(--green);border-width:2px;font-weight:700;color:var(--green)}
+.cor-dot{width:30px;height:30px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:.2s;flex-shrink:0}
+.cor-dot.active{border-color:var(--text);transform:scale(1.18)}
+.emoji-opt{font-size:22px;cursor:pointer;padding:4px 6px;border-radius:6px;border:1.5px solid transparent;transition:.15s}
+.config-btn{position:fixed;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.08);z-index:40;transition:.25s;color:var(--text2)}
+.config-btn:hover{transform:rotate(60deg);color:var(--text);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+body[data-theme="dark"]{background:#141414!important;color:#f0f0f0!important}
+body[data-theme="dark"] .app,body[data-theme="dark"] .card,body[data-theme="dark"] .nav,body[data-theme="dark"] .modal,body[data-theme="dark"] .frase-card,body[data-theme="dark"] .config-btn{background:#1e1e1e!important;border-color:#2a2a2a!important}
+body[data-theme="dark"] input,body[data-theme="dark"] select{background:#1e1e1e!important;color:#f0f0f0!important;border-color:#333!important}
+body[data-theme="dark"] .metric,body[data-theme="dark"] .tag{background:#141414!important;border-color:#2a2a2a!important}
+body[data-theme="dark"] .nav button{color:#909090!important}
+body[data-theme="dark"] .nav button.active{color:#fff!important}
+body[data-theme="light"]{background:#f0efe9!important;color:#1a1a1a!important}
+/* NAV ACTIVE GREEN PILL */
+.nav button.active{background:var(--green)!important;color:#fff!important;font-weight:600;box-shadow:0 1px 4px rgba(29,158,117,.3)}
+/* CARD SHADOW */
+.card,.nav,.modal{box-shadow:0 1px 3px rgba(0,0,0,.05),0 2px 8px rgba(0,0,0,.04)}
+/* METRIC BORDER */
+.metric{border:1px solid var(--border)}
+/* PROGRESS BAR */
+.progress-bar{border:1px solid var(--border)}
+/* INPUT FOCUS RING */
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,158,117,.1)}
+/* FRASE CARD REDESIGN */
+.frase-card{border-left:3px solid var(--green);background:var(--surface)}
+.frase-text{color:var(--text);font-style:italic;font-weight:500}
 @media(max-width:600px){
   .grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}
   .pomo-time,.crono-time{font-size:52px}
-  .nav button{font-size:11px;padding:6px 4px}
+  .nav button{font-size:11px;padding:6px 5px}
   .sub-assuntos{margin-left:10px}
+  .config-btn{top:10px;right:10px;width:30px;height:30px;font-size:14px}
 }
 @media(max-width:400px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
 </style>
@@ -162,12 +178,23 @@ body[data-theme="light"]{background:#f5f5f3!important;color:#1a1a1a!important}
 <body>
 <div class="app">
   <div class="header">
-    <div>
-      <div class="header-title">📚 Concursos Pro</div>
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+        <span id="tituloEmoji" style="font-size:var(--titulo-size,24px);cursor:pointer;user-select:none" onclick="openEmojiPicker()" title="Trocar emoji">📚</span>
+        <div id="tituloTexto" class="editavel header-title" style="font-size:var(--titulo-size,24px);letter-spacing:-0.5px" onclick="editTitulo()">Concursos Pro</div>
+      </div>
       <div class="header-sub" id="streakLabel">🔥 0 dias de streak</div>
     </div>
     <div class="spacer"></div>
     <div style="font-size:12px;color:var(--text2);text-align:right" id="dateLabel"></div>
+  </div>
+
+  <!-- EMOJI PICKER -->
+  <div id="emojiPicker" style="display:none;position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px;z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);flex-wrap:wrap;gap:6px;max-width:220px">
+    <div style="font-size:11px;color:var(--text2);width:100%;margin-bottom:4px">Escolha um emoji</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      ${['📚','📖','📝','🎓','💡','🏆','🎯','🚀','⭐','🔥','📊','🧠','✏️','📌','🗓️'].map(e=>`<span onclick="setEmoji('${e}')" style="font-size:20px;cursor:pointer;padding:3px;border-radius:4px" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">${e}</span>`).join('')}
+    </div>
   </div>
 
   <div class="nav">
@@ -178,8 +205,10 @@ body[data-theme="light"]{background:#f5f5f3!important;color:#1a1a1a!important}
     <button onclick="showPage('metas',this)">Metas</button>
     <button onclick="showPage('pomodoro',this)">Pomodoro</button>
     <button onclick="showPage('stats',this)">Estatísticas</button>
-    <button onclick="showPage('config',this)">⚙️ Config</button>
   </div>
+
+  <!-- BOTÃO CONFIG FLUTUANTE -->
+  <button class="config-btn" onclick="showPage('config',null)" title="Configurações">⚙️</button>
 
   <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
@@ -306,6 +335,34 @@ body[data-theme="light"]{background:#f5f5f3!important;color:#1a1a1a!important}
 
   <!-- CONFIGURAÇÕES -->
   <div class="page" id="page-config">
+
+    <div class="card">
+      <h2>✏️ Título da página</h2>
+      <div class="divider"></div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Pré-visualização</div>
+        <div style="display:flex;align-items:center;gap:8px;padding:12px;background:var(--bg);border-radius:var(--radius-sm)">
+          <span id="prevEmoji" style="font-size:var(--titulo-size,24px)">📚</span>
+          <span id="prevTitulo" style="font-size:var(--titulo-size,24px);font-weight:700;letter-spacing:-0.5px">Concursos Pro</span>
+        </div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Tamanho do título</div>
+        <div style="display:flex;gap:8px">
+          <button class="cfg-btn" id="tsize-sm" onclick="setTituloSize('sm')">Pequeno</button>
+          <button class="cfg-btn" id="tsize-md" onclick="setTituloSize('md')">Médio</button>
+          <button class="cfg-btn" id="tsize-lg" onclick="setTituloSize('lg')">Grande</button>
+          <button class="cfg-btn" id="tsize-xl" onclick="setTituloSize('xl')">Enorme</button>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Emoji</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          ${['📚','📖','📝','🎓','💡','🏆','🎯','🚀','⭐','🔥','📊','🧠','✏️','📌','🗓️'].map(e=>`<span class="emoji-opt" onclick="setEmoji('${e}')" style="font-size:22px;cursor:pointer;padding:4px 6px;border-radius:6px;border:1.5px solid transparent">${e}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <h2>🎨 Aparência</h2>
       <div class="divider"></div>
@@ -321,25 +378,15 @@ body[data-theme="light"]{background:#f5f5f3!important;color:#1a1a1a!important}
 
       <div style="margin-bottom:20px">
         <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Cor de destaque</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap" id="corOptions"></div>
-      </div>
-
-      <div style="margin-bottom:20px">
-        <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Fonte</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="fonte-system" onclick="setFonte('system')" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">SF Pro / Sistema</button>
-          <button class="cfg-btn" id="fonte-inter" onclick="setFonte('inter')" style="font-family:'Inter',sans-serif">Inter</button>
-          <button class="cfg-btn" id="fonte-georgia" onclick="setFonte('georgia')" style="font-family:'Georgia',serif">Georgia</button>
-          <button class="cfg-btn" id="fonte-mono" onclick="setFonte('mono')" style="font-family:'Courier New',monospace">Monospace</button>
-        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center" id="corOptions"></div>
       </div>
 
       <div>
-        <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Tamanho da fonte</div>
+        <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Tamanho do texto</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="size-sm" onclick="setSize('sm')">Pequeno</button>
-          <button class="cfg-btn" id="size-md" onclick="setSize('md')">Médio</button>
-          <button class="cfg-btn" id="size-lg" onclick="setSize('lg')">Grande</button>
+          <button class="cfg-btn" id="size-sm" onclick="setSize('sm')" style="font-size:11px">Pequeno</button>
+          <button class="cfg-btn" id="size-md" onclick="setSize('md')" style="font-size:13px">Médio</button>
+          <button class="cfg-btn" id="size-lg" onclick="setSize('lg')" style="font-size:15px">Grande</button>
         </div>
       </div>
     </div>
@@ -348,11 +395,11 @@ body[data-theme="light"]{background:#f5f5f3!important;color:#1a1a1a!important}
       <h2>📦 Dados</h2>
       <div class="divider"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn primary" onclick="exportarDados()">⬇️ Exportar dados (JSON)</button>
-        <button class="btn" onclick="document.getElementById('importFile').click()">⬆️ Importar dados</button>
+        <button class="btn primary" onclick="exportarDados()">⬇️ Exportar (JSON)</button>
+        <button class="btn" onclick="document.getElementById('importFile').click()">⬆️ Importar</button>
         <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarDados(event)">
       </div>
-      <div style="font-size:11px;color:var(--text2);margin-top:10px">Exporte para fazer backup ou transferir para outro dispositivo.</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:10px">Exporte para backup ou transferir para outro dispositivo.</div>
     </div>
   </div>
 <div class="modal-overlay" id="modalTopico">
@@ -1205,30 +1252,25 @@ const CORES=[
   {id:'rosa',label:'Rosa',accent:'#D4537E',dark:'#993556',bg:'#FBEAF0',txt:'#72243E'},
   {id:'preto',label:'Preto',accent:'#2C2C2A',dark:'#1a1a1a',bg:'#F1EFE8',txt:'#2C2C2A'},
 ];
-const FONTES={
-  system:"-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif",
-  inter:"'Inter',sans-serif",
-  georgia:"'Georgia',serif",
-  mono:"'Courier New',monospace"
-};
+const TITULO_SIZES={sm:'18px',md:'24px',lg:'32px',xl:'42px'};
 const SIZES={sm:'12px',md:'13px',lg:'15px'};
 
 let cfg=JSON.parse(localStorage.getItem('cp_cfg')||'{}');
 if(!cfg.tema)cfg.tema='auto';
 if(!cfg.cor)cfg.cor='verde';
-if(!cfg.fonte)cfg.fonte='system';
 if(!cfg.size)cfg.size='md';
+if(!cfg.tituloSize)cfg.tituloSize='md';
+if(!cfg.tituloTexto)cfg.tituloTexto='Concursos Pro';
+if(!cfg.tituloEmoji)cfg.tituloEmoji='📚';
 
 function saveCfg(){localStorage.setItem('cp_cfg',JSON.stringify(cfg));}
 
 function applyConfig(){
-  // tema
   const html=document.documentElement;
-  if(cfg.tema==='light'){html.style.colorScheme='light';document.body.style.background='';document.body.setAttribute('data-theme','light');}
+  if(cfg.tema==='light'){html.style.colorScheme='light';document.body.setAttribute('data-theme','light');}
   else if(cfg.tema==='dark'){html.style.colorScheme='dark';document.body.setAttribute('data-theme','dark');}
   else{html.style.colorScheme='';document.body.removeAttribute('data-theme');}
 
-  // cor de destaque
   const cor=CORES.find(c=>c.id===cfg.cor)||CORES[0];
   const root=document.documentElement;
   root.style.setProperty('--green',cor.accent);
@@ -1238,54 +1280,79 @@ function applyConfig(){
   root.style.setProperty('--today-bg',cor.bg);
   root.style.setProperty('--today-txt',cor.txt);
 
-  // fonte
-  document.body.style.fontFamily=FONTES[cfg.fonte]||FONTES.system;
-
-  // tamanho
   document.body.style.fontSize=SIZES[cfg.size]||SIZES.md;
+
+  const ts=TITULO_SIZES[cfg.tituloSize]||TITULO_SIZES.md;
+  root.style.setProperty('--titulo-size',ts);
+
+  const te=document.getElementById('tituloEmoji');
+  const tt=document.getElementById('tituloTexto');
+  const pe=document.getElementById('prevEmoji');
+  const pt=document.getElementById('prevTitulo');
+  if(te)te.textContent=cfg.tituloEmoji;
+  if(tt)tt.textContent=cfg.tituloTexto;
+  if(pe)pe.textContent=cfg.tituloEmoji;
+  if(pt)pt.textContent=cfg.tituloTexto;
+  document.title=cfg.tituloTexto;
 }
 
-function setTema(t){
-  cfg.tema=t;saveCfg();applyConfig();renderConfig();
+function editTitulo(){
+  const el=document.getElementById('tituloTexto');
+  startEdit(el,newVal=>{cfg.tituloTexto=newVal||'Concursos Pro';saveCfg();applyConfig();});
 }
-function setCor(c){
-  cfg.cor=c;saveCfg();applyConfig();renderConfig();
+function setEmoji(e){
+  cfg.tituloEmoji=e;saveCfg();applyConfig();
+  document.getElementById('emojiPicker').style.display='none';
+  renderConfig();
 }
-function setFonte(f){
-  cfg.fonte=f;saveCfg();applyConfig();renderConfig();
+function openEmojiPicker(){
+  const p=document.getElementById('emojiPicker');
+  p.style.display=p.style.display==='none'?'flex':'none';
 }
-function setSize(s){
-  cfg.size=s;saveCfg();applyConfig();renderConfig();
-}
+document.addEventListener('click',e=>{
+  const p=document.getElementById('emojiPicker');
+  if(p&&!p.contains(e.target)&&e.target.id!=='tituloEmoji')p.style.display='none';
+});
+
+function setTema(t){cfg.tema=t;saveCfg();applyConfig();renderConfig();}
+function setCor(c){cfg.cor=c;saveCfg();applyConfig();renderConfig();}
+function setSize(s){cfg.size=s;saveCfg();applyConfig();renderConfig();}
+function setTituloSize(s){cfg.tituloSize=s;saveCfg();applyConfig();renderConfig();}
 
 function renderConfig(){
-  // tema botões
   ['auto','light','dark'].forEach(t=>{
     const b=document.getElementById('tema-'+t);
-    if(b)b.className='cfg-btn'+(cfg.tema===t?' active':'');
-    if(b&&cfg.tema===t)b.style.borderColor='var(--green)';
-    else if(b)b.style.borderColor='';
+    if(b){b.className='cfg-btn'+(cfg.tema===t?' active':'');b.style.borderColor=cfg.tema===t?'var(--green)':'';}
   });
-  // fonte botões
-  ['system','inter','georgia','mono'].forEach(f=>{
-    const b=document.getElementById('fonte-'+f);
-    if(b)b.className='cfg-btn'+(cfg.fonte===f?' active':'');
-    if(b&&cfg.fonte===f)b.style.borderColor='var(--green)';
-    else if(b)b.style.borderColor='';
-  });
-  // size botões
   ['sm','md','lg'].forEach(s=>{
     const b=document.getElementById('size-'+s);
-    if(b)b.className='cfg-btn'+(cfg.size===s?' active':'');
-    if(b&&cfg.size===s)b.style.borderColor='var(--green)';
-    else if(b)b.style.borderColor='';
+    if(b){b.className='cfg-btn'+(cfg.size===s?' active':'');b.style.borderColor=cfg.size===s?'var(--green)':'';}
+  });
+  ['sm','md','lg','xl'].forEach(s=>{
+    const b=document.getElementById('tsize-'+s);
+    if(b){b.className='cfg-btn'+(cfg.tituloSize===s?' active':'');b.style.borderColor=cfg.tituloSize===s?'var(--green)':'';}
+  });
+  // emojis
+  document.querySelectorAll('.emoji-opt').forEach(el=>{
+    el.style.borderColor=el.textContent===cfg.tituloEmoji?'var(--green)':'transparent';
+    el.style.background=el.textContent===cfg.tituloEmoji?'var(--green-bg)':'';
   });
   // cores
   const container=document.getElementById('corOptions');
   if(container){
-    container.innerHTML=CORES.map(c=>`<div class="cor-dot${cfg.cor===c.id?' active':''}" style="background:${c.accent}" title="${c.label}" onclick="setCor('${c.id}')"></div>`).join('');
+    container.innerHTML=CORES.map(c=>`
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer" onclick="setCor('${c.id}')">
+        <div style="width:30px;height:30px;border-radius:50%;background:${c.accent};border:${cfg.cor===c.id?'3px solid var(--text)':'3px solid transparent'};transition:.15s;transform:${cfg.cor===c.id?'scale(1.15)':'scale(1)'}"></div>
+        <span style="font-size:10px;color:var(--text2)">${c.label}</span>
+      </div>`).join('');
   }
+  // preview título
+  const pe=document.getElementById('prevEmoji');
+  const pt=document.getElementById('prevTitulo');
+  if(pe)pe.textContent=cfg.tituloEmoji;
+  if(pt)pt.textContent=cfg.tituloTexto;
 }
+
 
 // EXPORTAR / IMPORTAR
 function exportarDados(){
