@@ -141,6 +141,9 @@ input:focus,select:focus{border-color:var(--green)}
 /* INTERVALO BADGE */
 .int-badge{display:inline-flex;align-items:center;font-size:10px;padding:1px 6px;border-radius:20px;font-weight:600;background:var(--blue-bg);color:var(--blue-txt);white-space:nowrap}
 .edit-hint{font-size:10px;color:var(--text3);margin-bottom:8px;padding:0 4px}
+.rev-interval-btn{padding:4px 10px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text2);font-size:11px;cursor:pointer;transition:.15s;font-weight:500}
+.rev-interval-btn:hover{background:var(--bg);color:var(--text)}
+.rev-interval-btn.active{background:var(--green);color:#fff;border-color:var(--green);font-weight:600}
 .cfg-btn{padding:7px 16px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--text2);font-size:13px;cursor:pointer;transition:.15s;font-weight:500}
 .cfg-btn:hover{background:var(--bg);color:var(--text)}
 .cfg-btn.active{border-color:var(--green);border-width:1.5px;font-weight:600;color:var(--green);background:var(--green-bg)}
@@ -548,7 +551,26 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
     </div>
     <div class="row"><label>Total de questões</label><input type="number" id="revQtdQ" min="0" value="0" style="margin:0" oninput="calcRevPct()"></div>
     <div class="row"><label>Questões certas</label><input type="number" id="revAcertosQ" min="0" value="0" style="margin:0" oninput="calcRevPct()"></div>
-    <div id="revPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    <div id="revPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:10px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Próxima revisão em</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap" id="revIntervalBtns">
+        <button class="rev-interval-btn" onclick="setRevInterval(0)">Auto</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(1)">1d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(3)">3d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(5)">5d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(7)">7d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(10)">10d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(14)">14d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(20)">20d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(28)">28d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(30)">30d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(60)">60d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(90)">90d</button>
+        <button class="rev-interval-btn" onclick="setRevInterval(120)">120d</button>
+      </div>
+      <div id="revIntervalPreview" style="font-size:11px;color:var(--text2);margin-top:6px">📅 Intervalo: automático (baseado no desempenho)</div>
+    </div>
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
       <button class="btn" onclick="closeModal()">Cancelar</button>
       <button class="btn primary" id="btnSalvarRevisao" onclick="saveRevisao()">♻️ Salvar revisão</button>
@@ -566,7 +588,26 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
     </div>
     <div class="row"><label>Total de questões</label><input type="number" id="revSubQtdQ" min="0" value="0" style="margin:0" oninput="calcRevSubPct()"></div>
     <div class="row"><label>Questões certas</label><input type="number" id="revSubAcertosQ" min="0" value="0" style="margin:0" oninput="calcRevSubPct()"></div>
-    <div id="revSubPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    <div id="revSubPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:10px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">Próxima revisão em</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap" id="revSubIntervalBtns">
+        <button class="rev-interval-btn" onclick="setRevSubInterval(0)">Auto</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(1)">1d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(3)">3d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(5)">5d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(7)">7d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(10)">10d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(14)">14d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(20)">20d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(28)">28d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(30)">30d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(60)">60d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(90)">90d</button>
+        <button class="rev-interval-btn" onclick="setRevSubInterval(120)">120d</button>
+      </div>
+      <div id="revSubIntervalPreview" style="font-size:11px;color:var(--text2);margin-top:6px">📅 Intervalo: automático (baseado no desempenho)</div>
+    </div>
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
       <button class="btn" onclick="closeModal()">Cancelar</button>
       <button class="btn primary" id="btnSalvarRevSub" onclick="saveRevSub()">♻️ Salvar</button>
@@ -964,6 +1005,7 @@ function togglePendenteSub2(mi,ti,si,s2i){
 }
 let curRevSub2={};
 function openRevSub2Modal(mi,ti,si,s2i){
+  resetRevIntervals();
   curRevSub2={mi,ti,si,s2i};
   const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i];
   const isPend=s.pendente===true;
@@ -1037,6 +1079,7 @@ function togglePendenteSub3(mi,ti,si,s2i,s3i){
 }
 let curRevSub3={};
 function openRevSub3Modal(mi,ti,si,s2i,s3i){
+  resetRevIntervals();
   curRevSub3={mi,ti,si,s2i,s3i};
   const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos[s3i];
   const isPend=s.pendente===true;
@@ -1074,6 +1117,7 @@ function editSubAssunto(mi,ti,si){
 }
 let curRevSubMat=null,curRevSubTop=null,curRevSubSub=null;
 function openRevSubModal(mi,ti,si){
+  resetRevIntervals();
   curRevSubMat=mi;curRevSubTop=ti;curRevSubSub=si;
   const s=data.materias[mi].topicos[ti].subAssuntos[si];
   const isPend=s.pendente===true;
@@ -1102,7 +1146,13 @@ function saveRevSub(){
   } else {
     s=data.materias[curRevSubMat].topicos[curRevSubTop].subAssuntos[curRevSubSub];
   }
-  const rev=nextRevDate(acertos,s.intervalAtual||1);
+  let rev;
+  if(revSubIntervalManual){
+    const d=new Date();d.setDate(d.getDate()+revSubIntervalManual);
+    rev={date:d.toISOString().slice(0,10),dias:revSubIntervalManual};
+  } else {
+    rev=nextRevDate(acertos,s.intervalAtual||1);
+  }
   s.acertos=acertos;s.qtdQ=(s.qtdQ||0)+qtdQ;s.acertosQ=(s.acertosQ||0)+acertosQ;
   s.proximaRevisao=rev.date;s.intervalAtual=rev.dias;
   s.revisoes=(s.revisoes||1)+1;s.dataEstudo=todayStr();s.pendente=false;
@@ -1239,7 +1289,34 @@ function renderMaterias(){
 let revTab='hoje';
 function setRevTab(t,btn){revTab=t;document.querySelectorAll('.tab-sub button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderRevisoes();}
 let curRevMat=null,curRevTop=null;
+let revIntervalManual=null;
+let revSubIntervalManual=null;
+
+function setRevInterval(dias){
+  revIntervalManual=dias===0?null:dias;
+  document.querySelectorAll('#revIntervalBtns .rev-interval-btn').forEach(b=>{
+    b.classList.toggle('active',(dias===0&&b.textContent==='Auto')||(dias>0&&b.textContent===dias+'d'));
+  });
+  const prev=document.getElementById('revIntervalPreview');
+  if(prev)prev.textContent=revIntervalManual?`📅 Próxima revisão em ${revIntervalManual} dias`:'📅 Intervalo: automático (baseado no desempenho)';
+}
+function setRevSubInterval(dias){
+  revSubIntervalManual=dias===0?null:dias;
+  document.querySelectorAll('#revSubIntervalBtns .rev-interval-btn').forEach(b=>{
+    b.classList.toggle('active',(dias===0&&b.textContent==='Auto')||(dias>0&&b.textContent===dias+'d'));
+  });
+  const prev=document.getElementById('revSubIntervalPreview');
+  if(prev)prev.textContent=revSubIntervalManual?`📅 Próxima revisão em ${revSubIntervalManual} dias`:'📅 Intervalo: automático (baseado no desempenho)';
+}
+function resetRevIntervals(){
+  revIntervalManual=null;revSubIntervalManual=null;
+  document.querySelectorAll('#revIntervalBtns .rev-interval-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.querySelectorAll('#revSubIntervalBtns .rev-interval-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  const p1=document.getElementById('revIntervalPreview');if(p1)p1.textContent='📅 Intervalo: automático (baseado no desempenho)';
+  const p2=document.getElementById('revSubIntervalPreview');if(p2)p2.textContent='📅 Intervalo: automático (baseado no desempenho)';
+}
 function openRevModal(mi,ti){
+  resetRevIntervals();
   curRevMat=mi;curRevTop=ti;
   const t=data.materias[mi].topicos[ti];
   const isPend=t.pendente===true;
@@ -1261,7 +1338,13 @@ function saveRevisao(){
     return;
   }
   const acertos=Math.round(acertosQ/qtdQ*100);
-  const rev=nextRevDate(acertos,t.intervalAtual||1);
+  let rev;
+  if(revIntervalManual){
+    const d=new Date();d.setDate(d.getDate()+revIntervalManual);
+    rev={date:d.toISOString().slice(0,10),dias:revIntervalManual};
+  } else {
+    rev=nextRevDate(acertos,t.intervalAtual||1);
+  }
   t.acertos=acertos;t.qtdQ=(t.qtdQ||0)+qtdQ;t.acertosQ=(t.acertosQ||0)+acertosQ;
   t.pendente=false;
   t.video=t.video||document.getElementById('revResVideo').checked;
@@ -1279,16 +1362,20 @@ function renderRevisoes(){
   let items=[];
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
-      if(t.temRevisao===false)return;
-      const isPend=t.pendente===true;
-      if(!isPend&&t.proximaRevisao)items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao),tipo:'topico'});
+      if(t.temRevisao===false||t.agrupador===true)return;
+      // aparece se tem revisão agendada; pendente SEM data não aparece
+      if(t.proximaRevisao)items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao),tipo:'topico'});
       (t.subAssuntos||[]).forEach((s,si)=>{
-        const isPendenteSub=s.pendente===true;
-        if(!isPendenteSub&&s.proximaRevisao)items.push({m,t,s,mi,ti,si,diff:daysDiff(s.proximaRevisao),tipo:'sub'});
-        // nível 3
-        (s.filhos||[]).forEach((s2,s2i)=>{(s2.filhos||[]).forEach((s3,s3i)=>{
-          if(!s3.pendente&&s3.proximaRevisao)items.push({m,t,s:s3,mi,ti,si,s2i,s3i,diff:daysDiff(s3.proximaRevisao),tipo:'sub3',nome3:s3.texto,path:`${t.nome} › ${s.texto} › ${s2.texto}`});
-        });});
+        if(s.agrupador===true)return;
+        if(s.proximaRevisao)items.push({m,t,s,mi,ti,si,diff:daysDiff(s.proximaRevisao),tipo:'sub'});
+        // nível 2
+        (s.filhos||[]).forEach((s2,s2i)=>{
+          if(!s2.agrupador&&s2.proximaRevisao)items.push({m,t,s:s2,mi,ti,si,s2i,diff:daysDiff(s2.proximaRevisao),tipo:'sub2',nome2:s2.texto,path:`${t.nome} › ${s.texto}`});
+          // nível 3
+          (s2.filhos||[]).forEach((s3,s3i)=>{
+            if(!s3.agrupador&&s3.proximaRevisao)items.push({m,t,s:s3,mi,ti,si,s2i,s3i,diff:daysDiff(s3.proximaRevisao),tipo:'sub3',nome3:s3.texto,path:`${t.nome} › ${s.texto} › ${s2.texto}`});
+          });
+        });
       });
     });
   });
@@ -1296,6 +1383,7 @@ function renderRevisoes(){
   if(!f.length){el.innerHTML=`<div class="empty">Nenhuma revisão ${revTab==='hoje'?'para hoje 🎉':'encontrada'}!</div>`;return;}
   el.innerHTML=f.map(x=>{
     if(x.tipo==='topico')return`<div class="card" style="margin-bottom:8px;border-left:3px solid ${x.pendente?'var(--amber-txt)':'transparent'}"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${x.pendente?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)">⏳ pendente</span>`:dominioBadge(x.t)+' '+intBadge(x.t.intervalAtual||1)+' '+revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome}${x.pendente?' · preencha as questões para agendar':' · '+x.t.acertos+'%'}</div></div></div></div>`;
+    if(x.tipo==='sub2')return`<div class="card" style="margin-bottom:8px;border-left:3px solid var(--green)"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.nome2}</span><div class="spacer"></div>${intBadge(x.s.intervalAtual||1)} ${revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSub2Modal(${x.mi},${x.ti},${x.si},${x.s2i})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.path}</div></div></div></div>`;
     if(x.tipo==='sub3')return`<div class="card" style="margin-bottom:8px;border-left:3px solid var(--green)"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.nome3}</span><div class="spacer"></div>${intBadge(x.s.intervalAtual||1)} ${revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSub3Modal(${x.mi},${x.ti},${x.si},${x.s2i},${x.s3i})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.path}</div></div></div></div>`;
     return`<div class="card" style="margin-bottom:8px;border-left:3px solid ${x.pendente?'var(--amber-txt)':'var(--green)'}"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.s.texto}</span><div class="spacer"></div>${x.pendente?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)">⏳ pendente</span>`:intBadge(x.s.intervalAtual||1)+' '+revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSubModal(${x.mi},${x.ti},${x.si})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.t.nome} · ${x.pendente?'preencha as questões para agendar':'sub-assunto · '+x.s.acertos+'%'}</div></div></div></div>`;
   }).join('');
@@ -1441,13 +1529,11 @@ function renderDash(){
   const today=todayStr(),revHoje=[];
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
-      if(t.temRevisao===false)return;
-      const isPend=t.pendente===true;
-      if(!isPend&&t.proximaRevisao&&daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti,tipo:'topico'});
+      if(t.temRevisao===false||t.agrupador===true)return;
+      if(t.proximaRevisao&&daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti,tipo:'topico'});
     });
     m.topicos.forEach((t,ti)=>{(t.subAssuntos||[]).forEach((s,si)=>{
-      const isPendS=s.pendente===true;
-      if(!isPendS&&s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0)revHoje.push({m,t,s,mi,ti,si,tipo:'sub'});
+      if(!s.agrupador&&s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0)revHoje.push({m,t,s,mi,ti,si,tipo:'sub'});
     });});
   });
   const metasHoje=data.metas.filter(m=>m.data===today);
