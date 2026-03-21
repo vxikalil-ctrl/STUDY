@@ -187,7 +187,7 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <div style="font-size:12px;color:var(--text2);text-align:right" id="dateLabel"></div>
-      <button class="config-btn" onclick="showPage('config',null)" title="Configurações">⚙</button>
+      <button class="config-btn" onclick="openCfgDrawer()" title="Configurações">⚙</button>
     </div>
   </div>
 
@@ -331,121 +331,118 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
 </div>
 
   <!-- CONFIGURAÇÕES -->
-  <div class="page" id="page-config">
-    <div class="card">
-      <h2>Título</h2>
-      <div class="divider"></div>
-      <div style="margin-bottom:16px">
-        <div class="cfg-label">Pré-visualização</div>
-        <div style="display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border)">
-          <span id="prevEmoji" style="font-size:28px">📚</span>
-          <span id="prevTitulo" style="font-size:22px;font-weight:700;letter-spacing:-0.5px">Concursos Pro</span>
-        </div>
+  <div class="page" id="page-config" style="display:none!important"></div>
+
+<div id="cfgDrawer" style="position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--surface);border-left:1px solid var(--border);z-index:200;overflow-y:auto;transition:right .25s cubic-bezier(.4,0,.2,1);padding:0">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:1">
+    <span style="font-size:13px;font-weight:600;letter-spacing:.2px">Configurações</span>
+    <button onclick="closeCfgDrawer()" style="background:none;border:none;cursor:pointer;font-size:18px;color:var(--text2);padding:2px 6px;border-radius:4px">×</button>
+  </div>
+  <div style="padding:14px 16px">
+
+    <!-- TÍTULO -->
+    <div style="margin-bottom:18px">
+      <div class="cfg-label">Título</div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);margin-bottom:8px">
+        <span id="prevEmoji" style="font-size:20px">📚</span>
+        <span id="prevTitulo" style="font-size:15px;font-weight:700;letter-spacing:-0.3px">Concursos Pro</span>
       </div>
-      <div style="margin-bottom:16px">
-        <div class="cfg-label">Tamanho</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="tsize-sm" onclick="setTituloSize('sm')">Pequeno</button>
-          <button class="cfg-btn" id="tsize-md" onclick="setTituloSize('md')">Médio</button>
-          <button class="cfg-btn" id="tsize-lg" onclick="setTituloSize('lg')">Grande</button>
-          <button class="cfg-btn" id="tsize-xl" onclick="setTituloSize('xl')">Enorme</button>
-        </div>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <button class="cfg-btn" id="tsize-sm" onclick="setTituloSize('sm')" style="flex:1;padding:4px 6px;font-size:11px">A</button>
+        <button class="cfg-btn" id="tsize-md" onclick="setTituloSize('md')" style="flex:1;padding:4px 6px;font-size:13px">A</button>
+        <button class="cfg-btn" id="tsize-lg" onclick="setTituloSize('lg')" style="flex:1;padding:4px 6px;font-size:16px">A</button>
+        <button class="cfg-btn" id="tsize-xl" onclick="setTituloSize('xl')" style="flex:1;padding:4px 6px;font-size:20px">A</button>
       </div>
-      <div>
-        <div class="cfg-label">Ícone</div>
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-          <div style="font-size:36px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm)" id="emojiPreviewBig"></div>
-          <div style="flex:1">
-            <div style="font-size:12px;color:var(--text2);margin-bottom:6px">Cole ou digite qualquer emoji</div>
-            <input type="text" id="emojiInput" placeholder="Ex: 🎯" style="margin:0;font-size:20px;width:100%;max-width:120px" oninput="onEmojiInput(this.value)">
-          </div>
-        </div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:8px">Ou escolha um dos sugeridos:</div>
-        <div id="emojiGrid" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+      <div id="emojiGrid" style="display:flex;flex-wrap:wrap;gap:4px"></div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);margin-bottom:16px"></div>
+
+    <!-- TEMA -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Tema</div>
+      <div style="display:flex;gap:6px">
+        <button class="cfg-btn" id="tema-auto" onclick="setTema('auto')" style="flex:1;font-size:11px;padding:5px 4px">Auto</button>
+        <button class="cfg-btn" id="tema-light" onclick="setTema('light')" style="flex:1;font-size:11px;padding:5px 4px">Claro</button>
+        <button class="cfg-btn" id="tema-dark" onclick="setTema('dark')" style="flex:1;font-size:11px;padding:5px 4px">Escuro</button>
       </div>
     </div>
 
-    <div class="card">
-      <h2>Aparência</h2>
-      <div class="divider"></div>
-
-      <div style="margin-bottom:20px">
-        <div class="cfg-label">Tema</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="tema-auto" onclick="setTema('auto')">Automático</button>
-          <button class="cfg-btn" id="tema-light" onclick="setTema('light')">Claro</button>
-          <button class="cfg-btn" id="tema-dark" onclick="setTema('dark')">Escuro</button>
-        </div>
-      </div>
-
-      <div style="margin-bottom:20px">
-        <div class="cfg-label">Cor de destaque</div>
-        <div id="corOptions" style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px"></div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <input type="color" id="corCustom" onchange="setCorCustom(this.value)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;padding:2px;background:none">
-          <span style="font-size:12px;color:var(--text2)">Cor personalizada</span>
-          <span id="corCustomHex" style="font-size:11px;color:var(--text3);font-family:monospace"></span>
-        </div>
-      </div>
-
-      <div style="margin-bottom:20px">
-        <div class="cfg-label">Cor do fundo</div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px" id="bgOptions"></div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <input type="color" id="bgCustom" onchange="setBgCustom(this.value)" style="width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;padding:2px;background:none">
-          <span style="font-size:12px;color:var(--text2)">Cor personalizada</span>
-        </div>
-      </div>
-
-      <div style="margin-bottom:20px">
-        <div class="cfg-label">Estilo dos cards</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="card-default" onclick="setCardStyle('default')">Padrão</button>
-          <button class="cfg-btn" id="card-flat" onclick="setCardStyle('flat')">Sem borda</button>
-          <button class="cfg-btn" id="card-shadow" onclick="setCardStyle('shadow')">Com sombra</button>
-          <button class="cfg-btn" id="card-border" onclick="setCardStyle('border')">Borda colorida</button>
-        </div>
-      </div>
-
-      <div style="margin-bottom:20px">
-        <div class="cfg-label">Raio dos cantos</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="radius-sharp" onclick="setRadius('sharp')">Reto</button>
-          <button class="cfg-btn" id="radius-soft" onclick="setRadius('soft')">Suave</button>
-          <button class="cfg-btn" id="radius-round" onclick="setRadius('round')">Redondo</button>
-        </div>
-      </div>
-
-      <div>
-        <div class="cfg-label">Tamanho do texto</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="cfg-btn" id="size-sm" onclick="setSize('sm')">Pequeno</button>
-          <button class="cfg-btn" id="size-md" onclick="setSize('md')">Médio</button>
-          <button class="cfg-btn" id="size-lg" onclick="setSize('lg')">Grande</button>
-        </div>
-      </div>
-
-      <div style="margin-top:20px">
-        <div class="cfg-label">Fonte</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap" id="fonteOptions"></div>
+    <!-- COR DESTAQUE -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Cor de destaque</div>
+      <div id="corOptions" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="color" id="corCustom" onchange="setCorCustom(this.value)" style="width:28px;height:28px;border-radius:50%;border:1px solid var(--border);cursor:pointer;padding:1px;background:none">
+        <span style="font-size:11px;color:var(--text2)">Personalizada</span>
+        <span id="corCustomHex" style="font-size:10px;color:var(--text3);font-family:monospace"></span>
       </div>
     </div>
 
-    <div class="card">
-      <h2>Dados</h2>
-      <div class="divider"></div>
-      <p style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">Seus dados ficam salvos neste navegador. Exporte regularmente para não perder nada caso troque de dispositivo ou limpe o cache.</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn primary" onclick="exportarDados()">Exportar backup</button>
-        <button class="btn" onclick="document.getElementById('importFile').click()">Importar backup</button>
+    <!-- FUNDO -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Fundo</div>
+      <div id="bgOptions" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="color" id="bgCustom" onchange="setBgCustom(this.value)" style="width:28px;height:28px;border-radius:50%;border:1px solid var(--border);cursor:pointer;padding:1px;background:none">
+        <span style="font-size:11px;color:var(--text2)">Personalizada</span>
+      </div>
+    </div>
+
+    <!-- ESTILO CARDS -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Cards</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+        <button class="cfg-btn" id="card-default" onclick="setCardStyle('default')" style="font-size:11px;padding:5px">Padrão</button>
+        <button class="cfg-btn" id="card-flat" onclick="setCardStyle('flat')" style="font-size:11px;padding:5px">Sem borda</button>
+        <button class="cfg-btn" id="card-shadow" onclick="setCardStyle('shadow')" style="font-size:11px;padding:5px">Sombra</button>
+        <button class="cfg-btn" id="card-border" onclick="setCardStyle('border')" style="font-size:11px;padding:5px">Colorida</button>
+      </div>
+    </div>
+
+    <!-- RAIO -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Cantos</div>
+      <div style="display:flex;gap:5px">
+        <button class="cfg-btn" id="radius-sharp" onclick="setRadius('sharp')" style="flex:1;font-size:11px;padding:5px">Reto</button>
+        <button class="cfg-btn" id="radius-soft" onclick="setRadius('soft')" style="flex:1;font-size:11px;padding:5px">Suave</button>
+        <button class="cfg-btn" id="radius-round" onclick="setRadius('round')" style="flex:1;font-size:11px;padding:5px">Redondo</button>
+      </div>
+    </div>
+
+    <!-- TEXTO -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Texto</div>
+      <div style="display:flex;gap:5px">
+        <button class="cfg-btn" id="size-sm" onclick="setSize('sm')" style="flex:1;font-size:11px;padding:5px">Pequeno</button>
+        <button class="cfg-btn" id="size-md" onclick="setSize('md')" style="flex:1;font-size:13px;padding:5px">Médio</button>
+        <button class="cfg-btn" id="size-lg" onclick="setSize('lg')" style="flex:1;font-size:15px;padding:5px">Grande</button>
+      </div>
+    </div>
+
+    <!-- FONTE -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Fonte</div>
+      <div id="fonteOptions" style="display:flex;flex-direction:column;gap:4px"></div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);margin-bottom:14px"></div>
+
+    <!-- DADOS -->
+    <div style="margin-bottom:10px">
+      <div class="cfg-label">Dados</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <button class="btn primary" onclick="exportarDados()" style="width:100%;font-size:12px">Exportar backup</button>
+        <button class="btn" onclick="document.getElementById('importFile').click()" style="width:100%;font-size:12px">Importar backup</button>
+        <button class="btn" onclick="restaurarEdital()" style="width:100%;font-size:12px">Restaurar edital padrão</button>
         <input type="file" id="importFile" accept=".json" style="display:none" onchange="importarDados(event)">
       </div>
-      <div class="divider"></div>
-      <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px">Edital</div>
-      <p style="font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.6">Restaura os 34 assuntos do edital padrão. Não apaga assuntos já existentes, só adiciona os que estiverem faltando.</p>
-      <button class="btn" onclick="restaurarEdital()">Restaurar edital padrão</button>
     </div>
+
   </div>
+</div>
+<div id="cfgOverlay" onclick="closeCfgDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.2);z-index:199"></div>
+
 <div class="modal-overlay" id="modalTopico">
   <div class="modal">
     <h3>Adicionar tópico</h3>
@@ -483,6 +480,9 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
   <div class="modal">
     <h3>Registrar revisão</h3>
     <div style="font-size:12px;color:var(--text2);margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:var(--radius-sm)" id="revisaoInfo"></div>
+    <div id="revisaoPendenteAviso" style="display:none;font-size:12px;padding:8px 12px;background:var(--amber-bg);color:var(--amber-txt);border-radius:var(--radius-sm);margin-bottom:10px">
+      ⏳ Este assunto está pendente. Preencha o total de questões para agendar a revisão.
+    </div>
     <div class="row"><label>Recursos usados</label>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <label style="min-width:auto;display:flex;align-items:center;gap:4px;font-size:12px"><input type="checkbox" id="revResVideo"> 🎥 Videoaula</label>
@@ -495,7 +495,7 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
     <div id="revPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
       <button class="btn" onclick="closeModal()">Cancelar</button>
-      <button class="btn primary" onclick="saveRevisao()">Salvar revisão</button>
+      <button class="btn primary" id="btnSalvarRevisao" onclick="saveRevisao()">♻️ Salvar revisão</button>
     </div>
   </div>
 </div>
@@ -505,12 +505,15 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
   <div class="modal">
     <h3>Revisar sub-assunto</h3>
     <div style="font-size:12px;color:var(--text2);margin-bottom:10px;padding:7px 10px;background:var(--bg);border-radius:var(--radius-sm)" id="revSubInfo"></div>
+    <div id="revSubPendenteAviso" style="display:none;font-size:12px;padding:8px 12px;background:var(--amber-bg);color:var(--amber-txt);border-radius:var(--radius-sm);margin-bottom:10px">
+      ⏳ Este sub-assunto está pendente. Preencha o total de questões para agendar a revisão.
+    </div>
     <div class="row"><label>Total de questões</label><input type="number" id="revSubQtdQ" min="0" value="0" style="margin:0" oninput="calcRevSubPct()"></div>
     <div class="row"><label>Questões certas</label><input type="number" id="revSubAcertosQ" min="0" value="0" style="margin:0" oninput="calcRevSubPct()"></div>
     <div id="revSubPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
     <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
       <button class="btn" onclick="closeModal()">Cancelar</button>
-      <button class="btn primary" onclick="saveRevSub()">Salvar</button>
+      <button class="btn primary" id="btnSalvarRevSub" onclick="saveRevSub()">♻️ Salvar</button>
     </div>
   </div>
 </div>
@@ -612,13 +615,11 @@ function save(){
 }
 function loadData(){
   try{
-    // tenta todas as chaves possíveis
     const raw=localStorage.getItem('cp_data')||localStorage.getItem('cp_bk')||localStorage.getItem('cp_backup');
     if(raw){
       const d=JSON.parse(raw);
       data=Object.assign(emptyData(),d);
     }
-    // garante que o edital padrão sempre existe se estiver vazio
     if(!data.edital||data.edital.length===0){
       data.edital=EDITAL_PADRAO.map(e=>({...e,done:false,subAssuntos:[]}));
     }
@@ -774,6 +775,16 @@ function editTopicoNome(mi,ti){
   const el=document.getElementById(`top_nome_${mi}_${ti}`);
   startEdit(el,newVal=>{data.materias[mi].topicos[ti].nome=newVal;save();});
 }
+function togglePendente(mi,ti){
+  const t=data.materias[mi].topicos[ti];
+  t.pendente=!t.pendente;
+  save();renderMaterias();
+}
+function togglePendenteSub(mi,ti,si){
+  const s=data.materias[mi].topicos[ti].subAssuntos[si];
+  s.pendente=!s.pendente;
+  save();renderMaterias();
+}
 function deleteTopico(mi,ti){data.materias[mi].topicos.splice(ti,1);save();renderMaterias();}
 
 // SUB-ASSUNTOS
@@ -803,7 +814,10 @@ let curRevSubMat=null,curRevSubTop=null,curRevSubSub=null;
 function openRevSubModal(mi,ti,si){
   curRevSubMat=mi;curRevSubTop=ti;curRevSubSub=si;
   const s=data.materias[mi].topicos[ti].subAssuntos[si];
-  document.getElementById('revSubInfo').textContent=s.texto+' · Intervalo atual: '+(s.intervalAtual||1)+'d · Acertos: '+(s.acertos||70)+'%';
+  const isPend=s.pendente===true;
+  document.getElementById('revSubInfo').textContent=s.texto+(isPend?'':' · Intervalo atual: '+(s.intervalAtual||1)+'d · Acertos: '+(s.acertos||0)+'%');
+  document.getElementById('revSubPendenteAviso').style.display=isPend?'block':'none';
+  document.getElementById('btnSalvarRevSub').textContent=isPend?'⏳♻️ Salvar':'♻️ Salvar';
   document.getElementById('revSubQtdQ').value=0;
   document.getElementById('revSubAcertosQ').value=0;
   document.getElementById('revSubPctPreview').textContent='Porcentagem: —';
@@ -814,14 +828,13 @@ function saveRevSub(){
   const acertosQ=parseInt(document.getElementById('revSubAcertosQ').value)||0;
   const s=data.materias[curRevSubMat].topicos[curRevSubTop].subAssuntos[curRevSubSub];
   if(qtdQ===0){
-    // sem questões: marca como pendente, não agenda revisão
-    s.pendente=true;
-    save();closeModal();renderMaterias();
+    showToast('⏳ Preencha o total de questões para agendar a revisão!');
     return;
   }
   const acertos=Math.round(acertosQ/qtdQ*100);
   const rev=nextRevDate(acertos,s.intervalAtual||1);
-  s.acertos=acertos;s.proximaRevisao=rev.date;s.intervalAtual=rev.dias;
+  s.acertos=acertos;s.qtdQ=(s.qtdQ||0)+qtdQ;s.acertosQ=(s.acertosQ||0)+acertosQ;
+  s.proximaRevisao=rev.date;s.intervalAtual=rev.dias;
   s.revisoes=(s.revisoes||1)+1;s.dataEstudo=todayStr();s.pendente=false;
   updateStreak();save();closeModal();renderMaterias();
 }
@@ -848,7 +861,7 @@ function renderMaterias(){
         const temRev=t.temRevisao!==false;
         const subKey=`${mi}_${ti}`;
         const subOpen=subPanelOpen[subKey]!==false;
-        const isPendente=temRev&&(t.pendente||!t.qtdQ);
+        const isPendente=temRev&&t.pendente===true;
         return`<div class="item">
           <div class="flex">${temRev?dominioRing(t):`<div style="width:36px;height:36px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">📂</div>`}<div style="flex:1;min-width:0">
             <div class="flex" style="flex-wrap:wrap;gap:4px">
@@ -856,25 +869,26 @@ function renderMaterias(){
               ${temRev?metodoBadge(t.metodo||'nova'):'<span class="tag">Agrupador</span>'} ${temRev?recursosTags(t):''}
               <div class="spacer"></div>
               ${temRev?dominioBadge(t)+' ':''} ${temRev&&!isPendente?intBadge(t.intervalAtual||1):''}
-              ${isPendente?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)">⏳ pendente</span>`:''}
+              ${temRev?`<span style="cursor:pointer;font-size:14px" onclick="togglePendente(${mi},${ti})" title="${isPendente?'Desmarcar pendente':'Marcar como pendente'}">${isPendente?'⏳':'🌱'}</span>`:''}
               <button class="btn sm" onclick="toggleSubPanel('${subKey}')" style="background:none;border:1px solid var(--border);border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:11px;color:var(--text2);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0;line-height:1">${subOpen?'−':'+'}</button>
               ${temRev?`<button class="btn sm" onclick="openRevModal(${mi},${ti})">Revisar</button>`:''}
               <button class="btn sm danger" onclick="deleteTopico(${mi},${ti})">✕</button>
             </div>
-            ${temRev?`<div class="item-sub">${isPendente?'⏳ Preencha as questões para agendar a revisão':`Acertos: ${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1} rev. · Próx: ${fmtDate(t.proximaRevisao)} ${revBadge(t.proximaRevisao)}`}</div>`:`<div class="item-sub">${subs.length} sub-assunto${subs.length!==1?'s':''}</div>`}
+            ${temRev?`<div class="item-sub">${isPendente?'⏳ Pendente — preencha as questões ao revisar':`Acertos: ${t.acertos}% · ${t.qtdQ||0}q · ${t.revisoes||1} rev. · Próx: ${fmtDate(t.proximaRevisao)} ${revBadge(t.proximaRevisao)}`}</div>`:`<div class="item-sub">${subs.length} sub-assunto${subs.length!==1?'s':''}</div>`}
             ${temRev?`<div class="acerto-bar"><div class="acerto-fill" style="width:${t.acertos}%;background:${bc}"></div></div>`:''}
           </div></div>
           <div id="sub_panel_${subKey}" class="sub-assuntos" style="${subOpen?'':'display:none'}">
             ${subs.map((s,si)=>{
               const sRev=s.proximaRevisao?daysDiff(s.proximaRevisao):null;
-              const isPendente=s.pendente||!s.qtdQ;
+              const isPendente=s.pendente===true;
               const sRevBadge=isPendente
-                ?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)" title="Preencha as questões para agendar a revisão">⏳ pendente</span>`
+                ?''
                 :sRev!==null?(sRev<=0?`<span class="sub-rev-badge" style="background:var(--red-bg);color:var(--red-txt)">Rev hoje</span>`:`<span class="sub-rev-badge" style="background:var(--blue-bg);color:var(--blue-txt)">${sRev}d</span>`):'';
               return`<div class="sub-assunto-item">
                 <div class="checkbox ${s.done?'done':''}" style="width:15px;height:15px;font-size:9px" onclick="toggleSubAssunto(${mi},${ti},${si})">${s.done?'✓':''}</div>
                 <span id="sub_txt_${mi}_${ti}_${si}" class="sub-assunto-text editavel" style="${s.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSubAssunto(${mi},${ti},${si})">${s.texto}</span>
                 ${sRevBadge}
+                <span style="cursor:pointer;font-size:13px" onclick="togglePendenteSub(${mi},${ti},${si})" title="${isPendente?'Desmarcar pendente':'Marcar como pendente'}">${isPendente?'⏳':'🌱'}</span>
                 <button class="btn sm" style="padding:2px 6px;background:var(--green-bg);color:var(--green-txt);border-color:var(--green-bg)" onclick="openRevSubModal(${mi},${ti},${si})">Rev</button>
                 <button class="btn sm" onclick="deleteSubAssunto(${mi},${ti},${si})" style="color:var(--text2);padding:2px 6px">✕</button>
               </div>`;
@@ -898,7 +912,10 @@ let curRevMat=null,curRevTop=null;
 function openRevModal(mi,ti){
   curRevMat=mi;curRevTop=ti;
   const t=data.materias[mi].topicos[ti];
-  document.getElementById('revisaoInfo').textContent=t.nome+' — '+data.materias[mi].nome+' · Intervalo atual: '+(t.intervalAtual||1)+'d';
+  const isPend=t.pendente===true;
+  document.getElementById('revisaoInfo').textContent=t.nome+' — '+data.materias[mi].nome+(isPend?'':' · Intervalo atual: '+(t.intervalAtual||1)+'d');
+  document.getElementById('revisaoPendenteAviso').style.display=isPend?'block':'none';
+  document.getElementById('btnSalvarRevisao').textContent=isPend?'⏳♻️ Salvar revisão':'♻️ Salvar revisão';
   ['revQtdQ','revAcertosQ'].forEach(id=>document.getElementById(id).value=0);
   ['revResVideo','revResQuestoes','revResPdf'].forEach(id=>document.getElementById(id).checked=false);
   document.getElementById('revPctPreview').textContent='Porcentagem: —';
@@ -909,8 +926,8 @@ function saveRevisao(){
   const acertosQ=parseInt(document.getElementById('revAcertosQ').value)||0;
   const t=data.materias[curRevMat].topicos[curRevTop];
   if(qtdQ===0){
-    t.pendente=true;
-    save();closeModal();renderAll();
+    // pendente: não salva nem agenda
+    showToast('⏳ Preencha o total de questões para agendar a revisão!');
     return;
   }
   const acertos=Math.round(acertosQ/qtdQ*100);
@@ -933,10 +950,10 @@ function renderRevisoes(){
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
       if(t.temRevisao===false)return;
-      const isPend=t.pendente||!t.qtdQ;
+      const isPend=t.pendente===true;
       if(!isPend&&t.proximaRevisao)items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao),tipo:'topico'});
       (t.subAssuntos||[]).forEach((s,si)=>{
-        const isPendenteSub=s.pendente||!s.qtdQ;
+        const isPendenteSub=s.pendente===true;
         if(!isPendenteSub&&s.proximaRevisao)items.push({m,t,s,mi,ti,si,diff:daysDiff(s.proximaRevisao),tipo:'sub'});
       });
     });
@@ -1066,11 +1083,11 @@ function renderDash(){
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
       if(t.temRevisao===false)return;
-      const isPend=t.pendente||!t.qtdQ;
+      const isPend=t.pendente===true;
       if(!isPend&&t.proximaRevisao&&daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti,tipo:'topico'});
     });
     m.topicos.forEach((t,ti)=>{(t.subAssuntos||[]).forEach((s,si)=>{
-      const isPendS=s.pendente||!s.qtdQ;
+      const isPendS=s.pendente===true;
       if(!isPendS&&s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0)revHoje.push({m,t,s,mi,ti,si,tipo:'sub'});
     });});
   });
@@ -1513,6 +1530,15 @@ document.addEventListener('click',e=>{
   if(p&&!p.contains(e.target)&&e.target.id!=='tituloEmoji')p.style.display='none';
 });
 
+function openCfgDrawer(){
+  document.getElementById('cfgDrawer').style.right='0';
+  document.getElementById('cfgOverlay').style.display='block';
+  renderConfig();
+}
+function closeCfgDrawer(){
+  document.getElementById('cfgDrawer').style.right='-320px';
+  document.getElementById('cfgOverlay').style.display='none';
+}
 function setFonte(f){cfg.fonte=f;saveCfg();applyConfig();renderConfig();}
 function setTema(t){cfg.tema=t;saveCfg();applyConfig();renderConfig();}
 function setCor(c){cfg.cor=c;cfg.corCustom='';saveCfg();applyConfig();renderConfig();}
@@ -1571,13 +1597,13 @@ function renderConfig(){
     container.innerHTML='';
     CORES.forEach(c=>{
       const div=document.createElement('div');
-      div.style.cssText='display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer';
+      div.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer';
       div.onclick=()=>setCor(c.id);
       const sel=cfg.cor===c.id&&!cfg.corCustom;
       const dot=document.createElement('div');
-      dot.style.cssText=`width:32px;height:32px;border-radius:50%;background:${c.accent};border:3px solid ${sel?'var(--text)':'transparent'};transition:.2s;transform:${sel?'scale(1.15)':'scale(1)'}`;
+      dot.style.cssText=`width:24px;height:24px;border-radius:50%;background:${c.accent};border:2.5px solid ${sel?'var(--text)':'transparent'};transition:.2s;transform:${sel?'scale(1.15)':'scale(1)'}`;
       const lbl=document.createElement('span');
-      lbl.textContent=c.label;lbl.style.cssText='font-size:10px;color:var(--text2);font-weight:500';
+      lbl.textContent=c.label;lbl.style.cssText='font-size:9px;color:var(--text2)';
       div.appendChild(dot);div.appendChild(lbl);container.appendChild(div);
     });
   }
@@ -1596,20 +1622,16 @@ function renderConfig(){
       const isDark=cfg.tema==='dark'||(cfg.tema==='auto'&&window.matchMedia('(prefers-color-scheme:dark)').matches);
       const color=isDark?b.dark:b.light;
       const div=document.createElement('div');
-      div.style.cssText='display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer';
+      div.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer';
       div.onclick=()=>setBgPreset(b.id);
       const sel=cfg.bgPreset===b.id&&!cfg.bgCustom;
       const dot=document.createElement('div');
-      dot.style.cssText=`width:32px;height:32px;border-radius:8px;background:${color};border:3px solid ${sel?'var(--green)':'var(--border)'};transition:.2s`;
+      dot.style.cssText=`width:24px;height:24px;border-radius:6px;background:${color};border:2.5px solid ${sel?'var(--green)':'var(--border)'};transition:.2s;transform:${sel?'scale(1.12)':'scale(1)'}`;
       const lbl=document.createElement('span');
-      lbl.textContent=b.label;lbl.style.cssText='font-size:10px;color:var(--text2);font-weight:500';
+      lbl.textContent=b.label;lbl.style.cssText='font-size:9px;color:var(--text2)';
       div.appendChild(dot);div.appendChild(lbl);bgC.appendChild(div);
     });
   }
-
-  // color picker fundo
-  const bc=document.getElementById('bgCustom');
-  if(bc&&cfg.bgCustom)bc.value=cfg.bgCustom;
 
   // preview título
   const pe=document.getElementById('prevEmoji');
@@ -1625,6 +1647,7 @@ function renderConfig(){
       const btn=document.createElement('button');
       btn.textContent=f.label;
       btn.style.fontFamily=f.family;
+      btn.style.cssText+=';text-align:left;padding:6px 10px;font-size:12px;width:100%';
       btn.className='cfg-btn'+(cfg.fonte===f.id?' active':'');
       btn.onclick=()=>setFonte(f.id);
       fc.appendChild(btn);
