@@ -109,6 +109,8 @@ input:focus,select:focus{border-color:var(--green)}
 .sub-assunto-item{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border)}
 .sub-assunto-item:last-child{border-bottom:none}
 .sub-assunto-text{font-size:12px;flex:1;color:var(--text2)}
+.sub-nivel2{margin-left:14px;border-left:2px solid var(--border);padding-left:10px;margin-top:3px;margin-bottom:2px}
+.sub-nivel3{margin-left:14px;border-left:1px dashed var(--border2);padding-left:10px;margin-top:2px;margin-bottom:2px}
 .sub-assunto-add{display:flex;gap:6px;margin-top:6px}
 .sub-assunto-add input{margin:0;font-size:12px;padding:5px 8px}
 /* REVISÃO SUB-ASSUNTO */
@@ -205,6 +207,7 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
     <button onclick="showPage('metas',this)">Metas</button>
     <button onclick="showPage('pomodoro',this)">Pomodoro</button>
     <button onclick="showPage('stats',this)">Estatísticas</button>
+    <button onclick="showPage('simulados',this)">Simulados</button>
   </div>
 
   <!-- DASHBOARD -->
@@ -215,10 +218,12 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
       <div class="frase-autor" id="fraseAutor"></div>
     </div>
     <div class="grid4" id="dashMetrics"></div>
-    <div class="grid2">
+    <div class="grid2" style="margin-bottom:12px">
       <div class="card"><h2>Revisões de hoje</h2><div id="dashRevisoes"></div></div>
       <div class="card"><h2>Metas do dia</h2><div id="dashMetas"></div></div>
     </div>
+    <!-- COUNTDOWN -->
+    <div id="dashCountdown"></div>
     <div class="card">
       <h2>Histórico semanal (minutos)</h2>
       <div class="chart-wrap"><canvas id="weekChart"></canvas></div>
@@ -328,6 +333,28 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
     <div class="card"><h2>Detalhes por matéria</h2><div id="statsMateria"></div></div>
     <div class="card"><h2>Histórico de estudos</h2><div id="statsHistorico"></div></div>
   </div>
+
+  <!-- SIMULADOS -->
+  <div class="page" id="page-simulados">
+    <div class="grid2" style="margin-bottom:12px">
+      <div class="card">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);margin-bottom:6px">Simulados realizados</div>
+        <div id="simTotalCount" style="font-size:42px;font-weight:700;letter-spacing:-2px">0</div>
+      </div>
+      <div class="card">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);margin-bottom:4px">Seu desempenho</div>
+        <div class="chart-wrap" style="height:100px"><canvas id="chartSimEvolucao"></canvas></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="flex">
+        <h2 style="margin:0">Simulados</h2>
+        <div class="spacer"></div>
+        <button class="btn primary" onclick="openSimModal()">+ Novo simulado</button>
+      </div>
+    </div>
+    <div id="listaSimulados"></div>
+  </div>
 </div>
 
   <!-- CONFIGURAÇÕES -->
@@ -428,7 +455,14 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
 
     <div style="border-top:1px solid var(--border);margin-bottom:14px"></div>
 
-    <!-- DADOS -->
+    <!-- PROVA -->
+    <div style="margin-bottom:16px">
+      <div class="cfg-label">Próxima prova</div>
+      <input type="text" id="cfgProvaLabel" placeholder="Ex: Polícia Federal" style="margin-bottom:6px;font-size:12px" oninput="setProva()">
+      <input type="date" id="cfgProvaData" style="margin-bottom:0;font-size:12px" onchange="setProva()">
+    </div>
+
+    <div style="border-top:1px solid var(--border);margin-bottom:14px"></div>
     <div style="margin-bottom:10px">
       <div class="cfg-label">Dados</div>
       <div style="display:flex;flex-direction:column;gap:6px">
@@ -443,6 +477,22 @@ input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,
 </div>
 <div id="cfgOverlay" onclick="closeCfgDrawer()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.2);z-index:199"></div>
 
+<div class="modal-overlay" id="modalSim">
+  <div class="modal">
+    <h3 id="simModalTitle">Novo simulado</h3>
+    <input type="text" id="simNome" placeholder="Nome do simulado (ex: Simulado PF 2025)">
+    <div class="row"><label>Data</label><input type="date" id="simData" style="margin:0"></div>
+    <div class="row"><label>Duração (min)</label><input type="number" id="simDuracao" min="0" value="0" style="margin:0"></div>
+    <div class="row"><label>Total de questões</label><input type="number" id="simQtd" min="1" value="10" style="margin:0" oninput="calcSimPct()"></div>
+    <div class="row"><label>Questões certas</label><input type="number" id="simAcertos" min="0" value="0" style="margin:0" oninput="calcSimPct()"></div>
+    <div id="simPctPreview" style="font-size:13px;color:var(--text2);margin-bottom:8px;padding:6px 10px;background:var(--bg);border-radius:var(--radius-sm)">Porcentagem: —</div>
+    <input type="text" id="simObs" placeholder="Observações (opcional)">
+    <div class="flex" style="margin-top:8px;justify-content:flex-end;gap:8px">
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+      <button class="btn primary" onclick="saveSim()">Salvar simulado</button>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="modalTopico">
   <div class="modal">
     <h3>Adicionar tópico</h3>
@@ -607,7 +657,7 @@ function renderFrase(){
   document.getElementById('fraseAutor').textContent=f.a?'— '+f.a:'';
 }
 
-function emptyData(){return{materias:[],metas:[],edital:[],streak:{count:0,lastDate:''},sessions:{},pomMinutes:{},cronoTotal:0};}
+function emptyData(){return{materias:[],metas:[],edital:[],simulados:[],streak:{count:0,lastDate:''},sessions:{},pomMinutes:{},cronoTotal:0};}
 let data=emptyData();
 function save(){
   localStorage.setItem('cp_data',JSON.stringify(data));
@@ -788,6 +838,71 @@ function togglePendenteSub(mi,ti,si){
 function deleteTopico(mi,ti){data.materias[mi].topicos.splice(ti,1);save();renderMaterias();}
 
 // SUB-ASSUNTOS
+function toggleSubPanel2(key){
+  subPanelOpen[key]=subPanelOpen[key]===true?false:true;
+  renderMaterias();
+}
+function openAddFilho(mi,ti,si){
+  const el=document.getElementById(`add2_${mi}_${ti}_${si}`);
+  if(el){el.style.display=el.style.display==='none'?'flex':'none';if(el.style.display!=='none')el.querySelector('input').focus();}
+}
+function openAddFilho2(mi,ti,si,s2i){
+  const el=document.getElementById(`add3_${mi}_${ti}_${si}_${s2i}`);
+  if(el){el.style.display=el.style.display==='none'?'flex':'none';if(el.style.display!=='none')el.querySelector('input').focus();}
+}
+function addFilho(mi,ti,si){
+  const inp=document.getElementById(`sub2_inp_${mi}_${ti}_${si}`);
+  const v=inp?inp.value.trim():'';if(!v)return;
+  if(!data.materias[mi].topicos[ti].subAssuntos[si].filhos)data.materias[mi].topicos[ti].subAssuntos[si].filhos=[];
+  data.materias[mi].topicos[ti].subAssuntos[si].filhos.push({texto:v,done:false,filhos:[]});
+  if(inp)inp.value='';save();renderMaterias();
+}
+function deleteSub2(mi,ti,si,s2i){data.materias[mi].topicos[ti].subAssuntos[si].filhos.splice(s2i,1);save();renderMaterias();}
+function toggleSub2(mi,ti,si,s2i){const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i];s.done=!s.done;save();renderMaterias();}
+function editSub2(mi,ti,si,s2i){
+  const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i];
+  const els=document.querySelectorAll('.sub-assunto-text');
+  // find by content match — use inline edit approach
+  const key=`s2_${mi}_${ti}_${si}_${s2i}`;
+  let el=document.getElementById(key);
+  if(!el)return;
+  startEdit(el,v=>{s.texto=v;save();});
+}
+function addFilho2(mi,ti,si,s2i){
+  const inp=document.getElementById(`sub3_inp_${mi}_${ti}_${si}_${s2i}`);
+  const v=inp?inp.value.trim():'';if(!v)return;
+  const s2=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i];
+  if(!s2.filhos)s2.filhos=[];
+  s2.filhos.push({texto:v,done:false,pendente:true,proximaRevisao:null,intervalAtual:null,acertos:0,qtdQ:0,acertosQ:0,revisoes:0});
+  if(inp)inp.value='';save();renderMaterias();
+}
+function addSub3(mi,ti,si,s2i){addFilho2(mi,ti,si,s2i);}
+function deleteSub3(mi,ti,si,s2i,s3i){data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos.splice(s3i,1);save();renderMaterias();}
+function toggleSub3(mi,ti,si,s2i,s3i){const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos[s3i];s.done=!s.done;save();renderMaterias();}
+function editSub3(mi,ti,si,s2i,s3i){
+  const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos[s3i];
+  const id=`s3_${mi}_${ti}_${si}_${s2i}_${s3i}`;
+  const el=document.getElementById(id);if(!el)return;
+  startEdit(el,v=>{s.texto=v;save();});
+}
+function togglePendenteSub3(mi,ti,si,s2i,s3i){
+  const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos[s3i];
+  s.pendente=!s.pendente;save();renderMaterias();
+}
+let curRevSub3={};
+function openRevSub3Modal(mi,ti,si,s2i,s3i){
+  curRevSub3={mi,ti,si,s2i,s3i};
+  const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos[s3i];
+  const isPend=s.pendente===true;
+  document.getElementById('revSubInfo').textContent=s.texto+(isPend?'':' · '+( s.intervalAtual||1)+'d');
+  document.getElementById('revSubPendenteAviso').style.display=isPend?'block':'none';
+  document.getElementById('btnSalvarRevSub').textContent=isPend?'⏳♻️ Salvar':'♻️ Salvar';
+  document.getElementById('revSubQtdQ').value=0;
+  document.getElementById('revSubAcertosQ').value=0;
+  document.getElementById('revSubPctPreview').textContent='Porcentagem: —';
+  document.getElementById('modalRevSub').classList.add('open');
+  curRevSubMat=null; // sinaliza que é nível 3
+}
 function addSubAssunto(mi,ti){
   const inp=document.getElementById(`sub_inp_${mi}_${ti}`);
   const v=inp.value.trim();if(!v)return;
@@ -826,11 +941,19 @@ function openRevSubModal(mi,ti,si){
 function saveRevSub(){
   const qtdQ=parseInt(document.getElementById('revSubQtdQ').value)||0;
   const acertosQ=parseInt(document.getElementById('revSubAcertosQ').value)||0;
-  const s=data.materias[curRevSubMat].topicos[curRevSubTop].subAssuntos[curRevSubSub];
-  if(qtdQ===0){
-    showToast('⏳ Preencha o total de questões para agendar a revisão!');
-    return;
+  if(qtdQ===0){showToast('⏳ Preencha o total de questões para agendar a revisão!');return;}
+  // nível 3
+  if(curRevSubMat===null){
+    const {mi,ti,si,s2i,s3i}=curRevSub3;
+    const s=data.materias[mi].topicos[ti].subAssuntos[si].filhos[s2i].filhos[s3i];
+    const acertos=Math.round(acertosQ/qtdQ*100);
+    const rev=nextRevDate(acertos,s.intervalAtual||1);
+    s.acertos=acertos;s.qtdQ=(s.qtdQ||0)+qtdQ;s.acertosQ=(s.acertosQ||0)+acertosQ;
+    s.proximaRevisao=rev.date;s.intervalAtual=rev.dias;s.revisoes=(s.revisoes||1)+1;s.dataEstudo=todayStr();s.pendente=false;
+    updateStreak();save();closeModal();renderMaterias();return;
   }
+  // nível 1
+  const s=data.materias[curRevSubMat].topicos[curRevSubTop].subAssuntos[curRevSubSub];
   const acertos=Math.round(acertosQ/qtdQ*100);
   const rev=nextRevDate(acertos,s.intervalAtual||1);
   s.acertos=acertos;s.qtdQ=(s.qtdQ||0)+qtdQ;s.acertosQ=(s.acertosQ||0)+acertosQ;
@@ -880,17 +1003,53 @@ function renderMaterias(){
           <div id="sub_panel_${subKey}" class="sub-assuntos" style="${subOpen?'':'display:none'}">
             ${subs.map((s,si)=>{
               const sRev=s.proximaRevisao?daysDiff(s.proximaRevisao):null;
-              const isPendente=s.pendente===true;
-              const sRevBadge=isPendente
-                ?''
-                :sRev!==null?(sRev<=0?`<span class="sub-rev-badge" style="background:var(--red-bg);color:var(--red-txt)">Rev hoje</span>`:`<span class="sub-rev-badge" style="background:var(--blue-bg);color:var(--blue-txt)">${sRev}d</span>`):'';
-              return`<div class="sub-assunto-item">
-                <div class="checkbox ${s.done?'done':''}" style="width:15px;height:15px;font-size:9px" onclick="toggleSubAssunto(${mi},${ti},${si})">${s.done?'✓':''}</div>
-                <span id="sub_txt_${mi}_${ti}_${si}" class="sub-assunto-text editavel" style="${s.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSubAssunto(${mi},${ti},${si})">${s.texto}</span>
-                ${sRevBadge}
-                <span style="cursor:pointer;font-size:13px" onclick="togglePendenteSub(${mi},${ti},${si})" title="${isPendente?'Desmarcar pendente':'Marcar como pendente'}">${isPendente?'⏳':'🌱'}</span>
-                <button class="btn sm" style="padding:2px 6px;background:var(--green-bg);color:var(--green-txt);border-color:var(--green-bg)" onclick="openRevSubModal(${mi},${ti},${si})">Rev</button>
-                <button class="btn sm" onclick="deleteSubAssunto(${mi},${ti},${si})" style="color:var(--text2);padding:2px 6px">✕</button>
+              const isPend1=s.pendente===true;
+              const subs2=s.filhos||[];
+              const s2Key=`${mi}_${ti}_${si}`;
+              const s2Open=subPanelOpen[s2Key]===true;
+              const badge1=!subs2.length&&!isPend1&&sRev!==null?(sRev<=0?`<span class="sub-rev-badge" style="background:var(--red-bg);color:var(--red-txt)">Hoje</span>`:`<span class="sub-rev-badge" style="background:var(--blue-bg);color:var(--blue-txt)">${sRev}d</span>`):'';
+              return`<div>
+                <div class="sub-assunto-item">
+                  <div class="checkbox ${s.done?'done':''}" style="width:15px;height:15px;font-size:9px" onclick="toggleSubAssunto(${mi},${ti},${si})">${s.done?'✓':''}</div>
+                  <span id="sub_txt_${mi}_${ti}_${si}" class="sub-assunto-text editavel" style="${s.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSubAssunto(${mi},${ti},${si})">${s.texto}</span>
+                  ${badge1}
+                  ${!subs2.length?`<span style="cursor:pointer;font-size:12px;opacity:.7" onclick="togglePendenteSub(${mi},${ti},${si})">${isPend1?'⏳':'🌱'}</span>`:''}
+                  ${!subs2.length?`<button class="btn sm" style="padding:2px 5px;background:var(--green-bg);color:var(--green-txt);border-color:var(--green-bg)" onclick="openRevSubModal(${mi},${ti},${si})">Rev</button>`:''}
+                  ${subs2.length?`<button onclick="toggleSubPanel2('${s2Key}')" style="background:none;border:1px solid var(--border);border-radius:50%;width:16px;height:16px;cursor:pointer;font-size:9px;color:var(--text2);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0">${s2Open?'−':'+'}</button>`:''}
+                  <button onclick="openAddFilho(${mi},${ti},${si})" style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text3);padding:0 2px" title="Adicionar sub-nível">›+</button>
+                  <button class="btn sm" onclick="deleteSubAssunto(${mi},${ti},${si})" style="color:var(--text2);padding:2px 5px">✕</button>
+                </div>
+                ${s2Open?`<div class="sub-nivel2">${subs2.map((s2,s2i)=>{
+                  const s2Subs=s2.filhos||[];
+                  const s3Key=`${mi}_${ti}_${si}_${s2i}`;
+                  const s3Open=subPanelOpen[s3Key]===true;
+                  return`<div>
+                    <div class="sub-assunto-item">
+                      <div class="checkbox ${s2.done?'done':''}" style="width:13px;height:13px;font-size:8px" onclick="toggleSub2(${mi},${ti},${si},${s2i})">${s2.done?'✓':''}</div>
+                      <span id="s2_${mi}_${ti}_${si}_${s2i}" class="sub-assunto-text editavel" style="font-size:11px;${s2.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSub2(${mi},${ti},${si},${s2i})">${s2.texto}</span>
+                      ${s2Subs.length?`<button onclick="toggleSubPanel2('${s3Key}')" style="background:none;border:1px solid var(--border);border-radius:50%;width:14px;height:14px;cursor:pointer;font-size:8px;color:var(--text2);flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0">${s3Open?'−':'+'}</button>`:''}
+                      <button onclick="openAddFilho2(${mi},${ti},${si},${s2i})" style="background:none;border:none;cursor:pointer;font-size:10px;color:var(--text3);padding:0 2px">›+</button>
+                      <button class="btn sm" onclick="deleteSub2(${mi},${ti},${si},${s2i})" style="color:var(--text2);padding:1px 4px;font-size:10px">✕</button>
+                    </div>
+                    ${s3Open?`<div class="sub-nivel3">${s2Subs.map((s3,s3i)=>{
+                      const s3Rev=s3.proximaRevisao?daysDiff(s3.proximaRevisao):null;
+                      const s3Pend=s3.pendente===true;
+                      const s3Badge=!s3Pend&&s3Rev!==null?(s3Rev<=0?`<span class="sub-rev-badge" style="background:var(--red-bg);color:var(--red-txt)">Hoje</span>`:`<span class="sub-rev-badge" style="background:var(--blue-bg);color:var(--blue-txt)">${s3Rev}d</span>`):'';
+                      return`<div class="sub-assunto-item">
+                        <div class="checkbox ${s3.done?'done':''}" style="width:12px;height:12px;font-size:7px" onclick="toggleSub3(${mi},${ti},${si},${s2i},${s3i})">${s3.done?'✓':''}</div>
+                        <span id="s3_${mi}_${ti}_${si}_${s2i}_${s3i}" class="sub-assunto-text editavel" style="font-size:10px;${s3.done?'text-decoration:line-through;color:var(--text3)':''}" onclick="editSub3(${mi},${ti},${si},${s2i},${s3i})">${s3.texto}</span>
+                        ${s3Badge}
+                        <span style="cursor:pointer;font-size:10px;opacity:.7" onclick="togglePendenteSub3(${mi},${ti},${si},${s2i},${s3i})">${s3Pend?'⏳':'🌱'}</span>
+                        <button class="btn sm" style="padding:1px 4px;background:var(--green-bg);color:var(--green-txt);border-color:var(--green-bg);font-size:10px" onclick="openRevSub3Modal(${mi},${ti},${si},${s2i},${s3i})">Rev</button>
+                        <button class="btn sm" onclick="deleteSub3(${mi},${ti},${si},${s2i},${s3i})" style="color:var(--text2);padding:1px 4px;font-size:10px">✕</button>
+                      </div>`;
+                    }).join('')}
+                    <div id="add3_${mi}_${ti}_${si}_${s2i}" style="display:none" class="sub-assunto-add"><input type="text" id="sub3_inp_${mi}_${ti}_${si}_${s2i}" placeholder="+ nível 3..." style="font-size:11px;padding:3px 7px;margin:0" onkeydown="if(event.key==='Enter')addSub3(${mi},${ti},${si},${s2i})"><button class="btn sm primary" onclick="addSub3(${mi},${ti},${si},${s2i})" style="padding:2px 8px">+</button></div>
+                    </div>`:''}
+                  </div>`;
+                }).join('')}
+                <div id="add2_${mi}_${ti}_${si}" style="display:none" class="sub-assunto-add"><input type="text" id="sub2_inp_${mi}_${ti}_${si}" placeholder="+ nível 2..." style="font-size:11px;padding:3px 7px;margin:0" onkeydown="if(event.key==='Enter')addFilho(${mi},${ti},${si})"><button class="btn sm primary" onclick="addFilho(${mi},${ti},${si})" style="padding:2px 8px">+</button></div>
+                </div>`:''}
               </div>`;
             }).join('')}
             <div class="sub-assunto-add">
@@ -955,6 +1114,10 @@ function renderRevisoes(){
       (t.subAssuntos||[]).forEach((s,si)=>{
         const isPendenteSub=s.pendente===true;
         if(!isPendenteSub&&s.proximaRevisao)items.push({m,t,s,mi,ti,si,diff:daysDiff(s.proximaRevisao),tipo:'sub'});
+        // nível 3
+        (s.filhos||[]).forEach((s2,s2i)=>{(s2.filhos||[]).forEach((s3,s3i)=>{
+          if(!s3.pendente&&s3.proximaRevisao)items.push({m,t,s:s3,mi,ti,si,s2i,s3i,diff:daysDiff(s3.proximaRevisao),tipo:'sub3',nome3:s3.texto,path:`${t.nome} › ${s.texto} › ${s2.texto}`});
+        });});
       });
     });
   });
@@ -962,6 +1125,7 @@ function renderRevisoes(){
   if(!f.length){el.innerHTML=`<div class="empty">Nenhuma revisão ${revTab==='hoje'?'para hoje 🎉':'encontrada'}!</div>`;return;}
   el.innerHTML=f.map(x=>{
     if(x.tipo==='topico')return`<div class="card" style="margin-bottom:8px;border-left:3px solid ${x.pendente?'var(--amber-txt)':'transparent'}"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${x.pendente?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)">⏳ pendente</span>`:dominioBadge(x.t)+' '+intBadge(x.t.intervalAtual||1)+' '+revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome}${x.pendente?' · preencha as questões para agendar':' · '+x.t.acertos+'%'}</div></div></div></div>`;
+    if(x.tipo==='sub3')return`<div class="card" style="margin-bottom:8px;border-left:3px solid var(--green)"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.nome3}</span><div class="spacer"></div>${intBadge(x.s.intervalAtual||1)} ${revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSub3Modal(${x.mi},${x.ti},${x.si},${x.s2i},${x.s3i})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.path}</div></div></div></div>`;
     return`<div class="card" style="margin-bottom:8px;border-left:3px solid ${x.pendente?'var(--amber-txt)':'var(--green)'}"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.s.texto}</span><div class="spacer"></div>${x.pendente?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)">⏳ pendente</span>`:intBadge(x.s.intervalAtual||1)+' '+revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSubModal(${x.mi},${x.ti},${x.si})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.t.nome} · ${x.pendente?'preencha as questões para agendar':'sub-assunto · '+x.s.acertos+'%'}</div></div></div></div>`;
   }).join('');
 }
@@ -1077,8 +1241,32 @@ function renderMetas(){
 
 // DASHBOARD
 let weekChartInst=null;
+function renderCountdown(){
+  const el=document.getElementById('dashCountdown');
+  if(!el)return;
+  if(!cfg.provaLabel||!cfg.provaData){
+    el.innerHTML=`<div style="text-align:center;padding:8px 0 12px;font-size:12px;color:var(--text3)">
+      <span style="cursor:pointer;text-decoration:underline" onclick="openCfgDrawer()">+ Adicionar data da prova</span>
+    </div>`;
+    return;
+  }
+  const dias=Math.ceil((new Date(cfg.provaData+'T00:00:00')-new Date(todayStr()+'T00:00:00'))/(1000*86400));
+  const cor=dias<=7?'var(--red)':dias<=30?'var(--amber-txt)':'var(--green)';
+  el.innerHTML=`<div class="card" style="margin-bottom:12px;display:flex;align-items:center;gap:16px;padding:14px 20px">
+    <div style="flex:1;min-width:0">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text2);margin-bottom:4px">Próxima prova</div>
+      <div style="font-size:16px;font-weight:700;letter-spacing:-0.3px">${cfg.provaLabel}</div>
+      <div style="font-size:11px;color:var(--text2);margin-top:3px">${new Date(cfg.provaData+'T00:00:00').toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'long',year:'numeric'})}</div>
+    </div>
+    <div style="text-align:center;flex-shrink:0">
+      <div style="font-size:48px;font-weight:700;letter-spacing:-3px;color:${cor};line-height:1">${dias>0?dias:0}</div>
+      <div style="font-size:11px;color:var(--text2);font-weight:500">${dias===1?'dia':'dias'} para a prova</div>
+    </div>
+  </div>`;
+}
 function renderDash(){
   renderFrase();
+  renderCountdown();
   const today=todayStr(),revHoje=[];
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
@@ -1341,6 +1529,7 @@ function render(){
   else if(id==='edital')renderEdital();
   else if(id==='metas')renderMetas();
   else if(id==='stats')renderStats();
+  else if(id==='simulados')renderSimulados();
   else if(id==='config')renderConfig();
 }
 function renderAll(){renderDash();renderMaterias();renderRevisoes();renderEdital();renderMetas();}
@@ -1386,6 +1575,8 @@ if(!cfg.size)cfg.size='md';
 if(!cfg.tituloSize)cfg.tituloSize='md';
 if(!cfg.tituloTexto)cfg.tituloTexto='Concursos Pro';
 if(!cfg.tituloEmoji)cfg.tituloEmoji='📚';
+if(!cfg.provaLabel)cfg.provaLabel='';
+if(!cfg.provaData)cfg.provaData='';
 if(!cfg.fonte)cfg.fonte='system';
 
 function saveCfg(){localStorage.setItem('cp_cfg',JSON.stringify(cfg));}
@@ -1530,6 +1721,11 @@ document.addEventListener('click',e=>{
   if(p&&!p.contains(e.target)&&e.target.id!=='tituloEmoji')p.style.display='none';
 });
 
+function setProva(){
+  cfg.provaLabel=document.getElementById('cfgProvaLabel').value.trim();
+  cfg.provaData=document.getElementById('cfgProvaData').value;
+  saveCfg();renderCountdown();
+}
 function openCfgDrawer(){
   document.getElementById('cfgDrawer').style.right='0';
   document.getElementById('cfgOverlay').style.display='block';
@@ -1639,6 +1835,12 @@ function renderConfig(){
   if(pe)pe.textContent=cfg.tituloEmoji;
   if(pt)pt.textContent=cfg.tituloTexto;
 
+  // prova
+  const pl=document.getElementById('cfgProvaLabel');
+  const pd=document.getElementById('cfgProvaData');
+  if(pl)pl.value=cfg.provaLabel||'';
+  if(pd)pd.value=cfg.provaData||'';
+
   // fontes
   const fc=document.getElementById('fonteOptions');
   if(fc){
@@ -1693,6 +1895,115 @@ function importarDados(e){
 }
 
 applyConfig();
+
+// ==================== SIMULADOS ====================
+let simEditIdx=null;
+let simChartInst=null;
+
+function openSimModal(idx){
+  simEditIdx=idx!=null?idx:null;
+  document.getElementById('simModalTitle').textContent=idx!=null?'Editar simulado':'Novo simulado';
+  if(idx!=null){
+    const s=data.simulados[idx];
+    document.getElementById('simNome').value=s.nome||'';
+    document.getElementById('simData').value=s.data||'';
+    document.getElementById('simDuracao').value=s.duracao||0;
+    document.getElementById('simQtd').value=s.qtd||10;
+    document.getElementById('simAcertos').value=s.acertos||0;
+    document.getElementById('simObs').value=s.obs||'';
+    calcSimPct();
+  } else {
+    document.getElementById('simNome').value='';
+    document.getElementById('simData').value=todayStr();
+    document.getElementById('simDuracao').value=0;
+    document.getElementById('simQtd').value=10;
+    document.getElementById('simAcertos').value=0;
+    document.getElementById('simObs').value='';
+    document.getElementById('simPctPreview').textContent='Porcentagem: —';
+  }
+  document.getElementById('modalSim').classList.add('open');
+}
+function calcSimPct(){
+  const q=parseInt(document.getElementById('simQtd').value)||0;
+  const a=parseInt(document.getElementById('simAcertos').value)||0;
+  const pct=q>0?Math.round(a/q*100):0;
+  document.getElementById('simPctPreview').textContent=`Porcentagem: ${pct}% (${a}/${q})`;
+}
+function saveSim(){
+  const nome=document.getElementById('simNome').value.trim()||'Simulado';
+  const dataStr=document.getElementById('simData').value||todayStr();
+  const duracao=parseInt(document.getElementById('simDuracao').value)||0;
+  const qtd=parseInt(document.getElementById('simQtd').value)||0;
+  const acertos=parseInt(document.getElementById('simAcertos').value)||0;
+  const obs=document.getElementById('simObs').value.trim();
+  const pct=qtd>0?Math.round(acertos/qtd*100):0;
+  const sim={nome,data:dataStr,duracao,qtd,acertos,pct,obs};
+  if(!data.simulados)data.simulados=[];
+  if(simEditIdx!=null)data.simulados[simEditIdx]=sim;
+  else data.simulados.unshift(sim);
+  save();closeModal();renderSimulados();
+}
+function deleteSim(i){data.simulados.splice(i,1);save();renderSimulados();}
+
+function renderSimulados(){
+  if(!data.simulados)data.simulados=[];
+  const sims=data.simulados;
+
+  // count
+  const countEl=document.getElementById('simTotalCount');
+  if(countEl)countEl.textContent=sims.length;
+
+  // gráfico evolução
+  const canvas=document.getElementById('chartSimEvolucao');
+  if(canvas){
+    if(simChartInst)simChartInst.destroy();
+    const sorted=[...sims].sort((a,b)=>a.data.localeCompare(b.data));
+    simChartInst=new Chart(canvas,{
+      type:'line',
+      data:{
+        labels:sorted.map(s=>s.data?new Date(s.data+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}):''),
+        datasets:[{data:sorted.map(s=>s.pct),borderColor:'var(--green)',backgroundColor:'transparent',tension:.3,pointBackgroundColor:'var(--green)',pointRadius:4,borderWidth:2}]
+      },
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{font:{size:9}},grid:{display:false}}}}
+    });
+  }
+
+  // lista
+  const lista=document.getElementById('listaSimulados');
+  if(!lista)return;
+  if(!sims.length){
+    lista.innerHTML=`<div class="empty">Nenhum simulado ainda. Clique em + Novo simulado para começar!</div>`;
+    return;
+  }
+  lista.innerHTML=sims.map((s,i)=>{
+    const cor=s.pct>=80?'var(--green)':s.pct>=60?'var(--amber-txt)':'var(--red)';
+    const dur=s.duracao?`${Math.floor(s.duracao/60)?Math.floor(s.duracao/60)+'h ':''}${s.duracao%60?s.duracao%60+'min':''}`.trim():'—';
+    return`<div class="card" style="margin-bottom:8px">
+      <div class="flex">
+        <div style="flex:1;min-width:0">
+          <div class="flex" style="gap:8px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:600;letter-spacing:-0.2px">${s.nome}</span>
+            <span style="font-size:11px;color:var(--text2)">${s.data?new Date(s.data+'T00:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'}):''}</span>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <span style="font-size:11px;color:var(--text2)">⏱ ${dur}</span>
+            <span style="font-size:11px;color:var(--text2)">📝 ${s.qtd} questões</span>
+            <span style="font-size:11px;color:var(--text2)">✅ ${s.acertos} certas</span>
+            ${s.obs?`<span style="font-size:11px;color:var(--text2)">💬 ${s.obs}</span>`:''}
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+          <div style="text-align:center">
+            <div style="font-size:24px;font-weight:700;color:${cor};letter-spacing:-1px">${s.pct}%</div>
+            <div style="font-size:10px;color:var(--text2)">${s.acertos}/${s.qtd}</div>
+          </div>
+          <button class="btn sm" onclick="openSimModal(${i})" style="color:var(--text2)">✏️</button>
+          <button class="btn sm danger" onclick="deleteSim(${i})">✕</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
 
 const dn=['domingo','segunda','terça','quarta','quinta','sexta','sábado'],nd=new Date();
 document.getElementById('dateLabel').textContent=dn[nd.getDay()]+', '+nd.toLocaleDateString('pt-BR');
