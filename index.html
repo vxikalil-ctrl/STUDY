@@ -1363,25 +1363,39 @@ function renderRevisoes(){
   let items=[];
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
-      if(t.temRevisao===false||t.agrupador===true)return;
-      // aparece se tem revisão agendada; pendente SEM data não aparece
-      if(t.proximaRevisao)items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao),tipo:'topico'});
+      const topicoIsAgrup=t.temRevisao===false||t.agrupador===true;
+      // só adiciona o tópico se não for agrupador
+      if(!topicoIsAgrup&&t.proximaRevisao)items.push({m,t,mi,ti,diff:daysDiff(t.proximaRevisao),tipo:'topico'});
+      // sub-assuntos sempre processados, independente do tópico ser agrupador
       (t.subAssuntos||[]).forEach((s,si)=>{
         if(s.agrupador===true)return;
         if(s.proximaRevisao)items.push({m,t,s,mi,ti,si,diff:daysDiff(s.proximaRevisao),tipo:'sub'});
-        // nível 2
         (s.filhos||[]).forEach((s2,s2i)=>{
-          if(!s2.agrupador&&s2.proximaRevisao)items.push({m,t,s:s2,mi,ti,si,s2i,diff:daysDiff(s2.proximaRevisao),tipo:'sub2',nome2:s2.texto,path:`${t.nome} › ${s.texto}`});
-          // nível 3
+          if(s2.agrupador===true)return;
+          if(s2.proximaRevisao)items.push({m,t,s:s2,mi,ti,si,s2i,diff:daysDiff(s2.proximaRevisao),tipo:'sub2',nome2:s2.texto,path:`${t.nome} › ${s.texto}`});
           (s2.filhos||[]).forEach((s3,s3i)=>{
-            if(!s3.agrupador&&s3.proximaRevisao)items.push({m,t,s:s3,mi,ti,si,s2i,s3i,diff:daysDiff(s3.proximaRevisao),tipo:'sub3',nome3:s3.texto,path:`${t.nome} › ${s.texto} › ${s2.texto}`});
+            if(s3.agrupador===true)return;
+            if(s3.proximaRevisao)items.push({m,t,s:s3,mi,ti,si,s2i,s3i,diff:daysDiff(s3.proximaRevisao),tipo:'sub3',nome3:s3.texto,path:`${t.nome} › ${s.texto} › ${s2.texto}`});
           });
         });
       });
     });
   });
-  let f=revTab==='hoje'?items.filter(x=>x.diff<=0):revTab==='proximas'?items.filter(x=>x.diff>0).sort((a,b)=>a.diff-b.diff):items.sort((a,b)=>a.diff-b.diff);
-  if(!f.length){el.innerHTML=`<div class="empty">Nenhuma revisão ${revTab==='hoje'?'para hoje 🎉':'encontrada'}!</div>`;return;}
+  let f;
+  if(revTab==='hoje') f=items.filter(x=>x.diff<=0);
+  else if(revTab==='proximas') f=items.filter(x=>x.diff>0).sort((a,b)=>a.diff-b.diff);
+  else f=[...items].sort((a,b)=>a.diff-b.diff);
+  if(!f.length){
+    const total=items.length;
+    const hoje=items.filter(x=>x.diff<=0).length;
+    const proximas=items.filter(x=>x.diff>0).length;
+    el.innerHTML=`<div class="empty">
+      ${revTab==='hoje'?`Nenhuma revisão para hoje 🎉${proximas>0?`<br><span style="font-size:11px;color:var(--text2)">${proximas} revisão${proximas!==1?'ões':''} agendada${proximas!==1?'s':''} — veja em <b>Próximas</b></span>`:''}`:
+      revTab==='proximas'?`Nenhuma revisão próxima${hoje>0?`<br><span style="font-size:11px;color:var(--text2)">${hoje} para revisar hoje</span>`:''}`:
+      `Nenhuma revisão encontrada`}
+    </div>`;
+    return;
+  }
   el.innerHTML=f.map(x=>{
     if(x.tipo==='topico')return`<div class="card" style="margin-bottom:8px;border-left:3px solid ${x.pendente?'var(--amber-txt)':'transparent'}"><div class="flex">${dominioRing(x.t)}<div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title">${x.t.nome}</span><div class="spacer"></div>${x.pendente?`<span class="sub-rev-badge" style="background:var(--amber-bg);color:var(--amber-txt)">⏳ pendente</span>`:dominioBadge(x.t)+' '+intBadge(x.t.intervalAtual||1)+' '+revBadge(x.t.proximaRevisao)}<button class="btn sm primary" onclick="openRevModal(${x.mi},${x.ti})">Revisar</button></div><div class="item-sub">${x.m.nome}${x.pendente?' · preencha as questões para agendar':' · '+x.t.acertos+'%'}</div></div></div></div>`;
     if(x.tipo==='sub2')return`<div class="card" style="margin-bottom:8px;border-left:3px solid var(--green)"><div class="flex"><div style="flex:1;min-width:0"><div class="flex" style="flex-wrap:wrap;gap:4px"><span class="item-title" style="font-size:12px">${x.nome2}</span><div class="spacer"></div>${intBadge(x.s.intervalAtual||1)} ${revBadge(x.s.proximaRevisao)}<button class="btn sm primary" onclick="openRevSub2Modal(${x.mi},${x.ti},${x.si},${x.s2i})">Revisar</button></div><div class="item-sub">${x.m.nome} › ${x.path}</div></div></div></div>`;
@@ -1530,12 +1544,12 @@ function renderDash(){
   const today=todayStr(),revHoje=[];
   data.materias.forEach((m,mi)=>{
     m.topicos.forEach((t,ti)=>{
-      if(t.temRevisao===false||t.agrupador===true)return;
-      if(t.proximaRevisao&&daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti,tipo:'topico'});
+      const topicoIsAgrup=t.temRevisao===false||t.agrupador===true;
+      if(!topicoIsAgrup&&t.proximaRevisao&&daysDiff(t.proximaRevisao)<=0)revHoje.push({m,t,mi,ti,tipo:'topico'});
+      (t.subAssuntos||[]).forEach((s,si)=>{
+        if(!s.agrupador&&s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0)revHoje.push({m,t,s,mi,ti,si,tipo:'sub'});
+      });
     });
-    m.topicos.forEach((t,ti)=>{(t.subAssuntos||[]).forEach((s,si)=>{
-      if(!s.agrupador&&s.proximaRevisao&&daysDiff(s.proximaRevisao)<=0)revHoje.push({m,t,s,mi,ti,si,tipo:'sub'});
-    });});
   });
   const metasHoje=data.metas.filter(m=>m.data===today);
   const metasDone=metasHoje.filter(m=>m.done).length;
