@@ -1162,7 +1162,7 @@ function saveRevSub(){
   } else {
     rev=nextRevDate(acertos,s.intervalAtual||1);
   }
-  s.acertos=acertos;s.qtdQ=(s.qtdQ||0)+qtdQ;s.acertosQ=(s.acertosQ||0)+acertosQ;
+  s.acertos=acertos;s.qtdQ=qtdQ;s.acertosQ=acertosQ;
   s.proximaRevisao=rev.date;s.intervalAtual=rev.dias;
   s.revisoes=(s.revisoes||1)+1;s.dataEstudo=todayStr();
   s.pendente=false;s.agrupador=false; // vira 🌱 ao salvar revisão
@@ -1356,7 +1356,7 @@ function saveRevisao(){
   } else {
     rev=nextRevDate(acertos,t.intervalAtual||1);
   }
-  t.acertos=acertos;t.qtdQ=(t.qtdQ||0)+qtdQ;t.acertosQ=(t.acertosQ||0)+acertosQ;
+  t.acertos=acertos;t.qtdQ=qtdQ;t.acertosQ=acertosQ;
   t.pendente=false;t.temRevisao=true; // garante que vira 🌱 ao salvar
   t.video=t.video||document.getElementById('revResVideo').checked;
   t.questoes=t.questoes||document.getElementById('revResQuestoes').checked;
